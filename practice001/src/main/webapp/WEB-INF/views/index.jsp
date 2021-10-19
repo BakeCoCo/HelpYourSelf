@@ -38,6 +38,7 @@
         <%= k %>
         <br><a href="https://stackoverflow.com/questions/37038850/why-intellij-idea-doesnt-recognize-the-dollar-operator-of-jquery">inteli j jquery 사용하기</a>
         <!-- 대충 CTRL + ALT + S 눌러서 Languages & Frameworksf  D  SDAF  -->
+        <!-- Git 에 업로드 하려면 먼저 Push 한다음에 Commit 해야한다 그런데 내용을 입력해야한다.-->
     </div>
     </body>
 </html>
