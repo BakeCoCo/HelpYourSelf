@@ -3,6 +3,7 @@
 it's my practice for Spring Boot Application from Inteli J
 
 2021-10-15
+
 Today my Company senior order me for setting our project Rollingfile
 
 So i ask that what is Rollingfile?
@@ -20,6 +21,12 @@ Thankyou
 log4j2 설정하는법
 
 https://deeplify.dev/back-end/spring/logging
+
+
+
+
+
+
 
 
 
