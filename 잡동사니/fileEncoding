@@ -1,0 +1,10 @@
+파일다운로드시 띄어쓰기에 +가 생겻을때 해결법 
+
+fileName = URLEncoder.encode(fileName, "UTF-8");
+fileName = fileName.replaceAll("\\+", "%20");
+
+response.setHeader("Content-Disposition","attachment;filename=\"" + fileName + "\"");
+response.setHeader("Content-Transfer-Encoding", "binary");
+response.setContentType("utf-8");
+response.setContentType("application/octet-stream;charset=UTF-8");
+
