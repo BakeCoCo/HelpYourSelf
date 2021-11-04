@@ -1,0 +1,8 @@
+this.chkPW = function(pw){
+	if(!/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/.test(pw)){            
+		this.fnc_Alert("숫자+영문자+특수문자 조합으로 8자리 이상 사용해야 합니다.");
+		return false;
+	}else {
+		return true;
+	}
+}
