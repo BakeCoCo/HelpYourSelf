@@ -1,0 +1,45 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+
+public class findFile {
+	public static void main(String[] args) throws IOException {
+		
+		JFrame jf = new JFrame();
+		JFileChooser jc = new JFileChooser();
+		
+		try {
+			File dir = new File("C:\\workspace");
+			
+			jc.setFileSelectionMode(jc.DIRECTORIES_ONLY);
+			int result = jc.showOpenDialog(jf);
+			if(result == jc.APPROVE_OPTION) {
+				dir = jc.getSelectedFile();
+			}
+			System.out.println(dir);
+			
+			File files[] = dir.listFiles();
+			for(int k = 0; k<files.length; k++) {
+				BufferedReader br = new BufferedReader(new FileReader(files[k]));
+				String str;
+				while((str = br.readLine())!=null) {
+					if(str.indexOf("titletext=")>0) {
+          /* 넥사크로에서 파일명 + titletext 만 뽑아오게 */
+						str = str.substring(str.lastIndexOf("titletext=")+11);
+						str = str.substring(0,str.indexOf("\""));
+						System.out.print(files[k].toString().substring(files[k].toString().lastIndexOf("\\")+1,files[k].toString().indexOf(".xfdl")));
+						System.out.println(" : "+str);
+					}
+				}
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}
