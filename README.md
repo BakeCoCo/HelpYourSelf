@@ -1,7 +1,10 @@
 # HelpYourSelf
 
+```
 it's my practice for Spring Boot Application from Inteli J
+```
 
+```
 2021-10-15
 
 Today my Company senior order me for setting our project Rollingfile
@@ -22,7 +25,7 @@ log4j2 설정하는법
 
 https://deeplify.dev/back-end/spring/logging
 
-
+```
 
 
 
@@ -31,7 +34,7 @@ https://deeplify.dev/back-end/spring/logging
 
 
 
-
+```
 2021-11-03
 
 오늘은 과장님이 저보고 여태 개발을 대체 어떻게 하고있었냐고 물어보았습니다.
@@ -51,10 +54,10 @@ https://deeplify.dev/back-end/spring/logging
 일일이.. 다.. 찾아서.. 어떻게 동작하는지.... 다... 테스트해보고.. 사용햇는데.....
 
 아무튼 놀랍다고 합니다
+```
 
 
-
-
+```
 2021-11-08~09
 
 어제오늘 Docker를 공부해봤다.
@@ -72,5 +75,5 @@ Docker로 Tutorial doc문서를 보면서 해봤는데
 그래서 다시 원점으로 WEB을 공부해야되겟다.
 
 그래도 Docker에 기본적인 명령어는 몇개 기억했다.
-
+```
 
