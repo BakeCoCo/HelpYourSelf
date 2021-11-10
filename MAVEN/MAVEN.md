@@ -38,7 +38,9 @@ maven은 `.xml` 파일로 프로젝트를 통합 관리한다.
 ```
 <br>
 
-<a href="https://maven.apache.org/ref/3.8.3/maven-model/maven.html" target="_blank">메이븐 pom.xml 설정</a>
+자세한 사항은 apache maven 홈페이지에서 확인 가능하다.
+
+[메이븐 pom.xml설정](https://maven.apache.org/ref/3.8.3/maven-model/maven.html)
 - - - 
 
 ## MAVEN을 사용하는 이유
