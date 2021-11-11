@@ -1,6 +1,24 @@
 ## 메이븐
 
+[Maven 다운로드](https://maven.apache.org/download.cgi)
+
+## 환경변수 설정
+
+![image](https://user-images.githubusercontent.com/58055835/141259817-03dc7eb1-6b73-4762-89cd-b461db18872b.png)
+
+`C:\IDEA\apache-maven-3.6.2\bin`
+
+환경변수가 잘 세팅되었는지 확인.
+
+`cmd`에서 `mvn -version`
+
+![image](https://user-images.githubusercontent.com/58055835/141260562-5a760a29-581f-4f1b-ac8a-b5d511af353f.png)
+
+환경변수가 잘 세팅되었다면 maven의 버전을 확인할 수 있다.
+
+
 maven은 `.xml` 파일로 프로젝트를 통합 관리한다.
+
 
 기본적으로 pom.xml파일을 사용
 
