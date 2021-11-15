@@ -1,0 +1,24 @@
+this.grdData_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{	
+  // 선택시 체크값 변경
+  var ds = obj.getBindDataset();
+  this.fnc_CHKChange(e.row,e.cell,ds,"CHK");
+};
+
+/*
+	선택한 그리드의 CHK값 변경 ( 1또는 0으로 바꿔줌 )
+	row : row포지션  ( e.row )
+  cell : cell포지션 ( e.cell )
+	ds : 바인딩된 dataset ( var ds = obj.getBindDataset(); )
+	cname : 체크박스 컬럼명 ("CHK")
+*/
+
+this.fnc_CHKChange = function(row,cell, ds, cname){
+	var num = ds.getColumn(row,cname);
+	var c = ds.getColIndex(cname);
+	if(cell!=1){
+		if(!this.gfn_isNull(num)){
+			num==1?ds.setColumn(row,cname,0):ds.setColumn(row,cname,1);
+		}
+	}
+}
