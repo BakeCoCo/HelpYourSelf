@@ -1,0 +1,54 @@
+// 버튼 한번에 처리
+
+this.fnButtonAction = function(obj:nexacro.Button,e:nexacro.ClickEventInfo) {
+// 버튼 클릭시 ID 비교
+	switch(obj.name) {
+    case "btnPrint01" : 
+		case "btnPrint02" : 
+		case "btnPrint03" : 
+			var par1 = value;
+			var par2 = value;
+			var par3 = value;
+			this.fn_ubiPrint(par1,par2,par3,obj.name);
+		break;
+	}
+};
+
+// 유비리포트 파라미터 설정
+this.fn_ubiPrint = function(par1,par2,par3,버튼명)
+{
+	var params = { };
+	var fileName = "";
+	var ubiParam = "";
+	var popName = "";
+	var titlename = "";
+  
+	switch(bname){
+		case "btnPrint01":
+			fileName = '경로/리포트파일.jrf';
+			ubiParam = [['파라미터명',par1],['파라미터명',par2],['파라미터명',par3]];
+			popName = '팝업명';
+			titlename = '타이틀명';
+		break;
+		case "btnPrint02":
+			fileName = '경로/리포트파일.jrf';
+			ubiParam = [['파라미터명',par1],['파라미터명',par2],['파라미터명',par3]];
+			popName = '팝업명';
+			titlename = '타이틀명';
+		break;
+		case "btnPrint03":
+			fileName = '경로/리포트파일.jrf';
+			ubiParam = [['파라미터명',par1],['파라미터명',par2],['파라미터명',par3]];
+			popName = '팝업명';
+			titlename = '타이틀명';
+		break;
+	}
+	
+	params = {
+		ubiReportFile : fileName,
+		ubiArgument : ubiParam
+	}
+	
+	this.gfn_openPopup(popName, "common::UbiCommonViewer.xfdl", params , "fn_popupCallback", {title : titlename});
+};
+
