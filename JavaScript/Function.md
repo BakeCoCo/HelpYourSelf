@@ -110,21 +110,3 @@ function ks(n){
 }
 
 ```
-
-
-## 생성자 Generator
-
-```javascript
-function* g() {
-  yield 1;
-  yield 2;
-  yield 3;
-}
-
-var k = g();
-console.log(k.next()); //1
-console.log(k.next()); //2
-console.log(k.next()); //3
-console.log(k.next()); //undefined
-```
-생성자(function*) 에서 yield의 갯수만큼 출력한다.
