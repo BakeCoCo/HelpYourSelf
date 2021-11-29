@@ -57,6 +57,14 @@ nameCall();
 // Start  // (2초후) // End 
 ```
 
+```javascript
+async function foo(){ return 1 } === function foo() { return Promise.resolve(1) }
+async function foo(){ await 1 } === function foo() { return Promise.resolve(1).then(() => undefined) }
+```
+
+
+
+
 #### return // 함수 실행을 종료하고 호출한 함수에 값을 반환함
 ```javascript
 function a(name){ return name; }
