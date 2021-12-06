@@ -32,7 +32,7 @@ width와  height 속성을 지정하지 않으면 캔버스는 넓이300, 높이
 
 ` JavaScript DOC` 에서 다루는 튜토리얼에서는 `CanvasRenderingContext2D` == `2D`를 다룬다.
 
-#### 예시
+### 예시
 
 ```html
 <canvas id='tutorial'></canvas>
@@ -44,7 +44,7 @@ var ctx = canvas.getContext('2d');
 ```
 
 
-### 기본 예제 네모 그리기
+## 기본 예제 네모 그리기
 
 ```javascript
 var canvas = document.getElementById('tutorial');
@@ -66,7 +66,7 @@ ctx.fillRect(10,10,50,50);      // fillRect(x좌표,y좌표,넓이width,높이he
 
 ------
 
-#### 직사각형을 그리는 함수
+## 직사각형을 그리는 함수
 
 `fillRect(x, y, width, height)` 색칠된 직사각형을 그린다.
 
@@ -76,7 +76,7 @@ ctx.fillRect(10,10,50,50);      // fillRect(x좌표,y좌표,넓이width,높이he
 
 ------
 
-### 경로 그리기 `PATH`
+## 경로 그리기 `PATH`
 
 경로를 이용하여 도형을 만들 때에는 몇가지 추가적인 단계를 거쳐야 한다.
 
@@ -84,7 +84,7 @@ ctx.fillRect(10,10,50,50);      // fillRect(x좌표,y좌표,넓이width,높이he
 2. 그리기 명령어를 사용하여 경로상에 그린다.
 3. 경로가 한번 만들어졋다면 경로를 렌더링 하기위해 윤곽선을 그리거나 도형 내부를 채울 수 있다.
 
-#### 다음은 위 단계들을 실행하기 위해 사용되는 함수이다.
+## 다음은 위 단계들을 실행하기 위해 사용되는 함수이다.
 
 `beginPath()` 새로운 경로를 만든다.
 
@@ -98,11 +98,11 @@ ctx.fillRect(10,10,50,50);      // fillRect(x좌표,y좌표,넓이width,높이he
 
 --------
 
-#### 경로를 만들기 위한 첫 단계는
+## 경로를 만들기 위한 첫 단계는
 
 `beginPath()` 메소드를 사용하는것이다.
 
-#### 두번째 단계는
+## 두번째 단계는
 
 실제로 경로가 그려지는 위치를 설정하는 메소드를 호출하는 것이다.
 
@@ -139,13 +139,14 @@ ctx.lineTo(100,25);     // 100, 25로 라인그린다.
 ctx.fill();             // 도형 채운다.
 ```
 
-### 펜 이동하기
+## 펜 이동하기
 
 `moveTo(x, y)` 펜을 x와 y로 지정된 좌표로 옮긴다.
 
 ```javascript
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
+
 ctx.beginPath();
 ctx.arc(75, 75, 50, 0, Math.PI * 2, true); // Outer circle
 
@@ -159,4 +160,28 @@ ctx.moveTo(95, 65);
 ctx.arc(90, 65, 5, 0, Math.PI * 2, true);  // Right eye
 
 ctx.stroke();
+```
+
+## 선 그리기
+
+직선을 그리기 위해서는 lineTo() 메소드를 사용한다.
+
+`lineTo(x,y)` 현재의 드로잉 위치에서 x,y로 지정된 위치까지 선을 그린다.
+
+`moveTo(x,y)` 메소드를 통해 시작점을 변경할 수 있다.
+
+
+#### 예시
+
+```javascript
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+
+ctx.beginPath(); // 시작
+ctx.moveTo(25,25); //25,25로 이동
+ctx.lineTo(105,25); // 25,25 -> 105,25까지 직선
+ctx.lineTo(25,105); // 105,25 -> 25,105까지 직선
+ctx.fill(); // 채우기
+ctx.closePath(); // 시작지점과 끝지점 선으로 그려서 연결 // 근데 fill로 채워서 티안날듯
+ctx.stroke(); // 그리기
 ```
