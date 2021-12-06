@@ -1,5 +1,5 @@
 # HelpYourSelf
 
 ```
-it's my practice for javascript in Inteli J
+it's my practice for Inteli J
 ```
