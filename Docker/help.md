@@ -1,3 +1,8 @@
+##기초명령어
+```
+docker run -it --name test01 ubuntu
+docker를 run한다 -it입출력 --name이름정한다 test01로 ubuntu이미지를 사용해서
+```
 
 ## 이미지 검색
 ```
