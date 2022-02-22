@@ -8,6 +8,7 @@ docker를 run한다 -it입출력 --name이름정한다 test01로 ubuntu이미지
 apt-get install sudo  // sudo
 apt-get install yum   // yum
 apt-get install vi    // vi
+apt-get install vim   // vim 이 vi편집기.. vi는 뭐지..?
 ```
 
 
