@@ -11,6 +11,31 @@ apt-get install vi    // vi
 apt-get install vim   // vim 이 vi편집기.. vi는 뭐지..?
 ```
 
+## 근데 왜 안깔리냐
+```
+sudo apt-get install yum
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+E: Unable to locate package yum
+```
+
+ubuntu에서 package를 다운로드하는 홈페이지 주소가 추가되어 있지 않아서 그렇다.고 한다.
+`/etc/apt/source.list` 에 다음 내용을 추가한다. (혹시 모르니 source.list파일 백업 필수)
+
+```
+deb http://archive.ubuntu.com/ubuntu bionic main restricted universe multiverse
+deb http://archive.ubuntu.com/ubuntu bionic-security main restricted universe multiverse
+deb http://archive.ubuntu.com/ubuntu bionic-updates main restricted universe multiverse
+```
+
+apt-get을 업데이트한다.
+`apt-get update` 
+
++) yum은 레드햇 계열 리눅스 파일 관리자 라고한다.
+
+우분투에서는 그냥 apt로 써도 된다.
+
 
 ## 이미지 검색
 ```
