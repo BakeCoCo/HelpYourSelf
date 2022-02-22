@@ -1,3 +1,9 @@
+## 리눅스에 GitLab을 깔아보라함
+
+[https://about.gitlab.com/install/#ubuntu]일단여기
+
+
+
 ## 기초명령어
 ```
 docker run -it --name test01 ubuntu
