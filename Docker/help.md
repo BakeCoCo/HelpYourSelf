@@ -34,11 +34,14 @@ vi로 파일읽고 i가 편집모드 esc로 명령모드
 :wq 저장O 종료
 :q  종료
 :q! 저장X 종료
+
+
+입력하고 
+apt-get update 하여 업데이트한다.
+
+그리고 다시
+apt-get install yum
 ```
-
-
-apt-get을 업데이트한다.
-`apt-get update` 
 
 
 +) yum은 레드햇 계열 리눅스 파일 관리자 라고한다.
