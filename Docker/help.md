@@ -20,7 +20,7 @@ Reading state information... Done
 E: Unable to locate package yum
 ```
 
-ubuntu에서 package를 다운로드하는 홈페이지 주소가 추가되어 있지 않아서 그렇다.고 한다.
+ubuntu에서 package를 다운로드하는 홈페이지 주소가 추가되어 있지 않아서 그렇다.라고 한다.
 
 `/etc/apt/source.list` 에 다음 내용을 추가한다. (혹시 모르니 source.list파일 백업 필수)
 
@@ -43,6 +43,15 @@ apt-get update 하여 업데이트한다.
 apt-get install yum
 ```
 
+## 안된다 (병신블로거)
+```
+처음부터 다시
+docker run -it --name test01 ubuntu /bin/bash
+$apt update
+$apt install sudo
+$apt install vim
+$apt install yum //또실패?
+```
 
 +) yum은 레드햇 계열 리눅스 파일 관리자 라고한다.
 
