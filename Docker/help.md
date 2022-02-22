@@ -6,10 +6,13 @@ docker를 run한다 -it입출력 --name이름정한다 test01로 ubuntu이미지
 ## 우분투는 아무것도 안깔려있다.
 sudo 명령어를 사용하려면
 `apt-get install sudo`
+
 vi 명령어를 사용하려면
 `apt-get install vi`
+
 한번에 하려면
 `apt-get update`
+
 yum 명령어 사용하려면
 `apt install yum`
 
