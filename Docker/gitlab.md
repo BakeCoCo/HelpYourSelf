@@ -8,7 +8,7 @@
 
 Docker Pull Command 복사
 ```
->docker pull gitlab/gitlab-ce:latest
+docker pull gitlab/gitlab-ce:latest
 ```
 
 ### 다운로드후 docker run
