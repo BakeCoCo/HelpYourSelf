@@ -70,4 +70,25 @@ http://127.0.0.1:3000
 
 gitlab 접속 성공
 
+이제 접속해서 아이디 만들고 접속해보려고하는데 아직 admin이 확인안했다고 뜬다.
+
+그럼 [GitLab 가이드](https://docs.gitlab.com/ee/security/reset_user_password.html) 를 참고하여 관리자가 뭔지 알아보자
+
+[GitLab Rails console](https://docs.gitlab.com/ee/administration/operations/rails_console.html)
+
+```
+gitlab-rails console // GitLab console접속
+user = User.find_by_username 'root' // username이 root인거 찾아서 변수 user에 입력
+user.password = 'root' // user의 비밀번호 설정
+user.password_confirmation = 'root' // user의 비밀번호 확인
+user.save! // 저장
+// 하면 최소 8글자이상 입력하라고 한다.
+// 아무튼 8글자 이상 입력하고 저장하고 접속해보자
+exit // 나갈때
+```
+<img width="650" alt="453224df" src="https://user-images.githubusercontent.com/58055835/155877501-04f962f7-f7ab-4328-af32-1342cb8b3e58.png">
+
+<img width="1885" alt="66433466435" src="https://user-images.githubusercontent.com/58055835/155877741-e5f35251-6dd3-47ad-a279-097094849df8.png">
+
+root계정으로 접속한 모습
 
