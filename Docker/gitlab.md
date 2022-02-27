@@ -76,6 +76,10 @@ gitlab 접속 성공
 
 [GitLab Rails console](https://docs.gitlab.com/ee/administration/operations/rails_console.html)
 
+### console에서 입력한 모습
+
+<img width="650" alt="453224df" src="https://user-images.githubusercontent.com/58055835/155877501-04f962f7-f7ab-4328-af32-1342cb8b3e58.png">
+
 ```
 gitlab-rails console // GitLab console접속
 user = User.find_by_username 'root' // username이 root인거 찾아서 변수 user에 입력
@@ -86,9 +90,9 @@ user.save! // 저장
 // 아무튼 8글자 이상 입력하고 저장하고 접속해보자
 exit // 나갈때
 ```
-<img width="650" alt="453224df" src="https://user-images.githubusercontent.com/58055835/155877501-04f962f7-f7ab-4328-af32-1342cb8b3e58.png">
 
+### 다 했으면 root계정으로 접속해보자
 <img width="1885" alt="66433466435" src="https://user-images.githubusercontent.com/58055835/155877741-e5f35251-6dd3-47ad-a279-097094849df8.png">
 
-root계정으로 접속한 모습
+### root계정으로 접속한 모습
 
