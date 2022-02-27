@@ -66,3 +66,8 @@ docker restart gitlab
 ### gitlab 웹에서 접속
 http://127.0.0.1:3000
 
+<img width="946" alt="3423466" src="https://user-images.githubusercontent.com/58055835/155876736-54547247-d960-48d0-bb71-3cf05e991ab5.png">
+
+gitlab 접속 성공
+
+
