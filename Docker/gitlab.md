@@ -9,6 +9,9 @@
 Docker Pull Command 복사
 ```
 docker pull gitlab/gitlab-ce:latest
+
+위에걸 토대로 내가만든거
+docker pull ther0604/gitlab_image:latest
 ```
 
 ### 다운로드후 docker run
@@ -22,13 +25,18 @@ docker run --detach \
   --volume $GITLAB_HOME/logs:/var/log/gitlab \  /srv/gitlab
   --volume $GITLAB_HOME/data:/var/opt/gitlab \  /srv/gitlab
   --shm-size 256m \
-  gitlab/gitlab-ee:latest
+  gitlab/gitlab-ce:latest
 ```
 
 
 ### 다음과 같이 작성함
 ```
-docker run --detach --hostname 127.0.0.1 --publish 3000:80 --publish 2222:22 --name gitlab --restart always --volume /srv/gitlab/config:/etc/gitlab --volume /srv/gitlab/logs:/var/log/gitlab --volume /srv/gitlab/data:/var/opt/gitlab gitlab/gitlab-ce:latest
+docker run --detach --hostname 127.0.0.1 --publish 28800:80 --publish 20022:22 --publish 26443:443 --name gitlab --restart always --volume /srv/gitlab/config:/etc/gitlab --volume /srv/gitlab/logs:/var/log/gitlab --volume /srv/gitlab/data:/var/opt/gitlab gitlab/gitlab-ce:latest
+```
+
+### 내거로 pull한거는 이렇게
+```
+docker run --detach --hostname 127.0.0.1 --publish 28800:80 --publish 20022:22 --publish 26443:443 --name gitlab --restart always --volume /srv/gitlab/config:/etc/gitlab --volume /srv/gitlab/logs:/var/log/gitlab --volume /srv/gitlab/data:/var/opt/gitlab ther0604/gitlab_image:latest
 ```
 
 ### gitlab 컨테이너 접속
@@ -41,12 +49,12 @@ docker exec -it gitlab /bin/bash
 cd /etc/gitlab/
 vi gitlab.rb
 
-vi편집기로 gitlab.rb에 접속하여 찾기로 검색하여 해당 부분 수정
+vi편집기로 gitlab.rb에 접속하여 찾기로 검색하여 해당 부분 수정? 안해도되는듯한데?
 /external_url '
-external_url 'http://127.0.0.1:3000'
+external_url 'http://127.0.0.1:28800'
 
 /gitlab_shell_ssh_port
-gitlab_rails['gitlab_shell_ssh_port'] = 2222
+gitlab_rails['gitlab_shell_ssh_port'] = 20022
 
 :wq
 ```
@@ -64,7 +72,7 @@ docker restart gitlab
 ```
 
 ### gitlab 웹에서 접속
-http://127.0.0.1:3000
+http://127.0.0.1:28800
 
 <img width="946" alt="3423466" src="https://user-images.githubusercontent.com/58055835/155876736-54547247-d960-48d0-bb71-3cf05e991ab5.png">
 
