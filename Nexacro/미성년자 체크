@@ -1,0 +1,52 @@
+/*
+ * @fn_chkBornNo
+ * @생년월일 가지고 미성년자 체크하기 
+ * @미성년자 기준 = 생년월일 기준 19세 이상
+ * @Param = 주민번호앞자리 ex)9112301 , 911230-1
+ * @Result = true, false
+*/
+this.fn_chkBornNum = function(JNum)
+{	
+
+	var birth = /^([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|[1,2][0-9]|3[0,1])-?([1-8]{1})$/;
+	
+	var arr = new Array();
+	arr.push(JNum.match(birth)||'');
+	
+	if(arr == undefined || arr == ''){
+		return false;
+	}
+	
+	var age = nexacro.toNumber(arr[0][1]);
+	var monAge = nexacro.toNumber(arr[0][2])-1;
+	var dayAge = nexacro.toNumber(arr[0][3]);
+	var gender = arr[0][4];
+	
+	if(gender == 1 || gender == 2){
+		age += 1900;
+	}else if(gender == 3 || gender == 4){
+		age += 2000;
+	}else if(gender == 5 || gender == 6){
+		age += 2100;
+	}else if(gender == 7 || gender == 8){
+		age += 2200;
+	}
+	
+	var dt = new Date();
+	var year = dt.getFullYear();
+	var mon = dt.getMonth()+1;
+	var day = dt.getDay();
+	
+	var yearResult = (year - age);
+	var monResult = (mon - monAge);
+	var dayResult = (day - dayAge);
+	
+	if(yearResult > 19){
+		return true;
+	}else if(yearResult == 19){
+		if(monResult > 0 && dayResult >0){
+			return true;
+		}
+	}
+	return false;
+}
