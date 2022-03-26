@@ -6,16 +6,20 @@ this.Button01_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 	searchVal += this.gfn_getDivParam(this.Div00.form.Div01);
 	searchVal += this.gfn_getDivParam(this.Div00.form.Div02);
 	
+	// 마지막에 ',' 제거
 	searchVal = searchVal.substring(0,searchVal.length-1);
+	var oArg = '';
+	oArg = { searchVal };
 	
-	trace('{'+searchVal+'}');
+	trace(oArg.searchVal);
+	
 };
 
-this.gfn_getDivParam = function(obj)
+// div만 던지도록
+this.gfn_getDivParam = function(objDiv)
 {
 	var objComp = [Div,Grid,Edit,MaskEdit,Button,Calendar,CheckBox,Combo,Radio,TextArea];
-	var divComp = obj.form.components;
-	
+	var divComp = objDiv.form.components;
 	
 	var compVal = '';
 	for(var i=0; i<divComp.length; i++){
@@ -33,6 +37,9 @@ this.gfn_getCompParam = function(objComp)
 	var rtnValue ='';
 	var compId = objComp.id;
 	var compVal = objComp.value||'';
+	
+	
+	
 	rtnValue = '"'+compId+'":"'+compVal+'",';
 	return rtnValue;
 }
