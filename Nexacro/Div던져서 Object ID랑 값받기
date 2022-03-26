@@ -1,46 +1,38 @@
 
 this.Button01_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
-	this.gfn_getDivParam(this.Div00.form.Div00);
-	this.gfn_getDivParam(this.Div00.form.Div01);
-	this.gfn_getDivParam(this.Div00.form.Div02);
+	var searchVal = '';
+	searchVal += this.gfn_getDivParam(this.Div00.form.Div00);
+	searchVal += this.gfn_getDivParam(this.Div00.form.Div01);
+	searchVal += this.gfn_getDivParam(this.Div00.form.Div02);
+	
+	searchVal = searchVal.substring(0,searchVal.length-1);
+	
+	trace('{'+searchVal+'}');
 };
 
 this.gfn_getDivParam = function(obj)
-{
-// 	trace(obj instanceof Div);			//0
-// 	trace(obj instanceof Grid);			//1
-// 	trace(obj instanceof Edit);			//2
-// 	trace(obj instanceof MaskEdit);		//3
-// 	trace(obj instanceof Button);		//4
-// 	trace(obj instanceof Calendar);		//5
-// 	trace(obj instanceof CheckBox);		//6
-// 	trace(obj instanceof Combo);		//7
-// 	trace(obj instanceof Radio);		//8
-// 	trace(obj instanceof TextArea);		//9
-	this.gfn_chkComponents(obj);
-	
-	
-}
-
-this.gfn_chkComponents = function(obj)
 {
 	var objComp = [Div,Grid,Edit,MaskEdit,Button,Calendar,CheckBox,Combo,Radio,TextArea];
 	var divComp = obj.form.components;
 	
 	
-	var compNum;
+	var compVal = '';
 	for(var i=0; i<divComp.length; i++){
 		for(var j in objComp){
 			if(divComp[i] instanceof objComp[j]) {
-				trace(divComp[i] instanceof objComp[j],divComp[i],[j]);
-				this.gfn_getCompParam(divComp[i]);
+				compVal += this.gfn_getCompParam(divComp[i]);
 			}
 		}
 	}
+	return compVal;
 }
 
 this.gfn_getCompParam = function(objComp)
 {
-	trace(objComp.id,objComp.value);
+	var rtnValue ='';
+	var compId = objComp.id;
+	var compVal = objComp.value||'';
+	rtnValue = '"'+compId+'":"'+compVal+'",';
+	return rtnValue;
 }
