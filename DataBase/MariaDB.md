@@ -6,24 +6,21 @@ ssh -p포트번호 아이디@주소
 /etc/my.cnf
 /etc/my.cnf.d/
 에 있는것들 수정
-
-
 ```
 
-etc/my.cnf
+## etc/my.cnf
 
 ![image](https://user-images.githubusercontent.com/58055835/160532870-3b996a73-a0f2-4b17-9b2c-d827f381f0ca.png)
 
-etc/my.cnf.d/mysql-clients.cnf
+## etc/my.cnf.d/mysql-clients.cnf
 
 ![image](https://user-images.githubusercontent.com/58055835/160532914-350f0669-15ef-4c22-8057-a22999fd189b.png)
 
-etc/my.cnf.d/server.cnf
+## etc/my.cnf.d/server.cnf
 
 ![image](https://user-images.githubusercontent.com/58055835/160532971-2b7a7ffd-2f2d-4f65-97d4-8495f0c93648.png)
 
 ```
-
 select * from ta_code_m ;
 show create table ta_code_m;
 show create database msalesdev;
@@ -34,7 +31,6 @@ show create procedure SP_AAAA0010_SEL00 ; --이새끼 Database Collation latin1_
 SHOW FULL COLUMNS FROM ta_code_m;
 
 alter database msalesdev default character set utf8 COLLATE utf8_general_ci;
-
 ```
 
 ![image](https://user-images.githubusercontent.com/58055835/160532275-a43c8adb-f5db-4a29-9e4d-862e001cfc79.png)
