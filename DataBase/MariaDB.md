@@ -39,20 +39,6 @@ my.cnf파일을 찾아서
 
 근데 왜안되는지 모르겠다 ㅎㅎ
 
-
-
-찾앗다 범인
-
-```
-show create procedure 프로시져명
-```
-
-프로시저를 호출할때 이놈이 database collation이 latin1으로 설정되어있어서 오류났다.
-
-CREATE OR REPLACE로 다시 만들어주면
-
-database collation이 utf8로 바뀐다 끝
-
 ```
 Windows PowerShell
 ssh -p포트번호 아이디@주소
@@ -94,3 +80,15 @@ alter database msalesdev default character set utf8 COLLATE utf8_general_ci;
 
 --------------------------------------------------
 
+
+찾앗다 범인
+
+```
+show create procedure 프로시져명
+```
+
+프로시저를 호출할때 이놈이 database collation이 latin1으로 설정되어있어서 오류났다.
+
+CREATE OR REPLACE로 다시 만들어주면
+
+database collation이 utf8로 바뀐다 끝
