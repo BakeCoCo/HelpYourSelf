@@ -9,7 +9,11 @@ ssh -p포트번호 아이디@주소
 
 
 ```
+![image](https://user-images.githubusercontent.com/58055835/160532870-3b996a73-a0f2-4b17-9b2c-d827f381f0ca.png)
 
+![image](https://user-images.githubusercontent.com/58055835/160532914-350f0669-15ef-4c22-8057-a22999fd189b.png)
+
+![image](https://user-images.githubusercontent.com/58055835/160532971-2b7a7ffd-2f2d-4f65-97d4-8495f0c93648.png)
 
 ```
 
