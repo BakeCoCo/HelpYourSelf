@@ -1,4 +1,36 @@
+```
+Windows PowerShell
+ssh -p포트번호 아이디@주소
+비밀번호 입력
 
+/etc/my.cnf
+/etc/my.cnf.d/
+에 있는것들 수정
+
+
+```
+
+
+```
+
+select * from ta_code_m ;
+show create table ta_code_m;
+show create database msalesdev;
+
+show create procedure SP_AAAA0010_SEL00 ; --이새끼 Database Collation latin1_swedish_ci로 되있는지 확인
+--확인했으면 procedure 전부 선택해서 CREATE OR REPLACE 전부 실행해서 다시 바꿔줘야댐
+
+SHOW FULL COLUMNS FROM ta_code_m;
+
+alter database msalesdev default character set utf8 COLLATE utf8_general_ci;
+
+```
+
+![image](https://user-images.githubusercontent.com/58055835/160532275-a43c8adb-f5db-4a29-9e4d-862e001cfc79.png)
+
+
+
+--------------------------------------------------
 
 자꾸 유니코드 에러나서 짜증나죽것다
 
