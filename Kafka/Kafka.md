@@ -1,5 +1,14 @@
 ## Apache Kafka
 
+## APACHE KAFKA QUICKSTART
+https://kafka.apache.org/quickstart
+
+
+Zookeeper는 아직까지 사용해야 하나보다
+
+
+## 카프카 관련 유튜브
+
 https://www.youtube.com/watch?v=VJKZvOASvUA
 
 ![image](https://user-images.githubusercontent.com/58055835/161549778-62459d5b-e1d2-455b-bc9f-9ada043e4bea.png)
@@ -114,4 +123,28 @@ unclean.leader.election.enable 는 기본 false 이기 때문에 리더파티션
 * Rack-awareness : Server rack 이슈에 대응
 
 
+## Kafka Client
 
+* Kafka와 데이터를 주고받기 위해 사용하는 Java Library
+```
+<!-- https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients -->
+<dependency>
+    <groupId>org.apache.kafka</groupId>
+    <artifactId>kafka-clients</artifactId>
+    <version>3.1.0</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/org.apache.kafka/kafka -->
+<dependency>
+    <groupId>org.apache.kafka</groupId>
+    <artifactId>kafka_2.13</artifactId>
+    <version>3.1.0</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/org.apache.kafka/kafka-streams -->
+<dependency>
+    <groupId>org.apache.kafka</groupId>
+    <artifactId>kafka-streams</artifactId>
+    <version>3.1.0</version>
+</dependency>
+```
