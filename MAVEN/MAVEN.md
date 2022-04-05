@@ -148,3 +148,21 @@ mvn -f [설정파일명.xml] [plugin명]@[id]
 - 아직 개발 도중이며 현재 변경이 가능한 버전.
 - 로딩시 SNAPSHOT은 매번 업데이트를 하여 라이브러리를 지속적으로 통합 관리.
 - 개발이 완료된 후 SNAPSHOT을 RELEASE로 변경하거나 삭제하여야 한다.
+
+
+maven은 쉽게 Repository 사이트에서 라이브러리를 찾을 수 있다.
+
+https://mvnrepository.com/
+
+사이트에서 다음과 같은 형식으로 copy 가능하다.
+
+```
+<!-- 메이븐 라이브러리 주소 -->
+<dependency>
+    <groupId>그룹 아이디</groupId>
+    <artifactId>아티팩트 아이디</artifactId>
+    <version>버젼</version>
+    <scope>스코프</scope>
+</dependency>
+```
+
