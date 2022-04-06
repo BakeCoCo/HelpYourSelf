@@ -148,3 +148,13 @@ unclean.leader.election.enable 는 기본 false 이기 때문에 리더파티션
     <version>3.1.0</version>
 </dependency>
 ```
+
+
+![image](https://user-images.githubusercontent.com/58055835/161890309-a476a46e-a395-4a5d-974f-0a3af22f1826.png)
+
+
+
+![image](https://user-images.githubusercontent.com/58055835/161890323-5e944797-6ecd-4436-a554-8119f2430b85.png)
+
+
+
