@@ -39,6 +39,9 @@ docker container ls
 
 ### kafka 명령어 
 ```
+Linux에서는 sh
+Windows에서는 bat
+
 kafka-topics.sh --create --topic test --bootstrap-server localhost:9092 --replication-factor 1 --partitions 3
 kafka-console-producer.sh --bootstrap-server localhost:9092 --topic test
 kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning
