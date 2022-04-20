@@ -33,27 +33,45 @@ docker container ls
 ```
 명령어로 docker container가 실행중인지 확인
 
-확인후 ```docker container exec -it kafka bash``` 입력하여 bash로 들어감
+```docker container exec -it kafka bash```
+
+입력하여 bash로 들어감
+
+### kafka 명령어 
+```
+kafka-topics.sh --create --topic test --bootstrap-server localhost:9092 --replication-factor 1 --partitions 3
+kafka-console-producer.sh --bootstrap-server localhost:9092 --topic test
+kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning
+kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test -group testgroup --from-beginning
+kafka-console-consumer.sh --bootstrap-server localhost:9092 --list
+kafka-console-consumer.sh --bootstrap-server localhost:9092 --group testgroup --describe
+kafka-console-consumer.sh --bootstrap-server localhost:9092 --group testgroup --topic test --reset-offsets --to-earliest --execute
+kafka-console-consumer.sh --bootstrap-server localhost:9092 --group testgroup --topic test1 --reset-offsets --to-offset 10 --execute
 
 ```
-kafka-topics.sh --create --topic quickstart-events --bootstrap-server localhost:9092
-```
-입력하면 
 
-quickstart-events 라는 TOPIC이 생성됨
+### kafka config 명령어
+```
+broker.id : 정수로 된 브로커 번호. 클러스터 내 고유번호로 지정
+listeners : kafka 통신에 사용되는 host:port
+advertiese.listeners : kafka client가 접속할 host:port
+log.dirs : 메시지를 저장할 디스크 디렉토리, 세그먼트가 저장됨
+log.segment.bytes : 메시지가 저장되는 파일의 크기 단위
+log.retention.ms : 메시지를 얼마나 보존할지 지정. 닫힌 세그먼트를 처리
+zookeeper.connect : 브로커의 메타데이터를 저장하는 주키퍼의 위치
+auto.create.topics.enable : 자동으로 토픽 생성여부
+num.partitions : 자동생성된 토픽의 default partition 개수
+message.max.bytes : kafka broker에 쓰려는 메시지 최대 크기
+```
 
-확인 명령어
+## Ex) config/server.properties
 ```
-kafka-topics.sh --describe --topic quickstart-events --bootstrap-server localhost:9092
+listeners=PLAINTEXT://:9092
+advertised.listeners=PLAINTEXT://{ipAddress}:9092
 ```
+
+
 
 ![image](https://user-images.githubusercontent.com/58055835/164142003-9be020dd-92a2-47ea-bfcb-633f3b2b4c78.png)
 
-Kafka Producer에 입력하기
-`kafka-console-producer.sh --topic quickstart-events --bootstrap-server localhost:9092`
-입력후 아무거나 입력
-
-`kafka-console-consumer.sh --topic quickstart-events --from-beginning --bootstrap-server localhost:9092` 입력하면
-
-자신이 producer console에서 입력한것을 확인할 수 있다.
 
