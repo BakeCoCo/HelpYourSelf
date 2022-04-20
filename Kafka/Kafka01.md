@@ -28,16 +28,24 @@ services:
 
 ![image](https://user-images.githubusercontent.com/58055835/164141679-144326a8-4435-473e-885e-b23584d376f8.png)
 
-`docker container ls` 명령어로 docker container가 실행중인지 확인
+```
+docker container ls
+```
+명령어로 docker container가 실행중인지 확인
 
-확인후 `docker container exec -it kafka bash` 입력하여 bash로 들어감
+확인후 ```docker container exec -it kafka bash``` 입력하여 bash로 들어감
 
-`kafka-topics.sh --create --topic quickstart-events --bootstrap-server localhost:9092` 입력하면 
+```
+kafka-topics.sh --create --topic quickstart-events --bootstrap-server localhost:9092
+```
+입력하면 
 
 quickstart-events 라는 TOPIC이 생성됨
 
 확인 명령어
-`kafka-topics.sh --describe --topic quickstart-events --bootstrap-server localhost:9092`
+```
+kafka-topics.sh --describe --topic quickstart-events --bootstrap-server localhost:9092
+```
 
 ![image](https://user-images.githubusercontent.com/58055835/164142003-9be020dd-92a2-47ea-bfcb-633f3b2b4c78.png)
 
