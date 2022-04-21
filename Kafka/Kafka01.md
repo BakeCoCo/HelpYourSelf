@@ -42,14 +42,17 @@ docker container ls
 Linux에서는 sh
 Windows에서는 bat
 
-kafka-topics.sh --create --topic test --bootstrap-server localhost:9092 --replication-factor 1 --partitions 3
-kafka-console-producer.sh --bootstrap-server localhost:9092 --topic test
-kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning
-kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test -group testgroup --from-beginning
-kafka-console-consumer.sh --bootstrap-server localhost:9092 --list
-kafka-console-consumer.sh --bootstrap-server localhost:9092 --group testgroup --describe
-kafka-console-consumer.sh --bootstrap-server localhost:9092 --group testgroup --topic test --reset-offsets --to-earliest --execute
-kafka-console-consumer.sh --bootstrap-server localhost:9092 --group testgroup --topic test1 --reset-offsets --to-offset 10 --execute
+
+.\bin\windows\zookeeper-server-start.bat \config\zookeeper.properties
+.\bin\windows\kafka-server-start.bat \config\zookeeper.properties
+.\bin\windows\kafka-topics.sh --create --topic test --bootstrap-server localhost:9092 --replication-factor 1 --partitions 3
+.\bin\windows\kafka-console-producer.sh --bootstrap-server localhost:9092 --topic test
+.\bin\windows\kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning
+.\bin\windows\kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test -group testgroup --from-beginning
+.\bin\windows\kafka-console-consumer.sh --bootstrap-server localhost:9092 --list
+.\bin\windows\kafka-console-consumer.sh --bootstrap-server localhost:9092 --group testgroup --describe
+.\bin\windows\kafka-console-consumer.sh --bootstrap-server localhost:9092 --group testgroup --topic test --reset-offsets --to-earliest --execute
+.\bin\windows\kafka-console-consumer.sh --bootstrap-server localhost:9092 --group testgroup --topic test1 --reset-offsets --to-offset 10 --execute
 
 ```
 
