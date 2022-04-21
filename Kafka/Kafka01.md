@@ -62,6 +62,15 @@ num.partitions : 자동생성된 토픽의 default partition 개수
 message.max.bytes : kafka broker에 쓰려는 메시지 최대 크기
 ```
 
+### kafka Shell Scripts
+```
+-- window 에서는 sh -> bat
+kafka-topics.sh               // 토픽 생성, 조회, 수정
+kafka-console-consumer.sh     // 토픽의 레코드 즉시 조회
+kafka-console-producer.sh     // 토픽의 레코드를 전달(String)
+kafka-consumer-groups.sh      // 컨슈머그룹 조회, 컨슈머 오프셋 확인, 수정
+```
+
 
 ### kafka 명령어 
 ```
@@ -76,6 +85,7 @@ Windows에서는 bat
 .\bin\windows\kafka-topics.bat --bootstrap-server localhost:9092 --list
 
 .\bin\windows\kafka-console-producer.bat --bootstrap-server localhost:9092 --topic test
+.\bin\windows\kafka-console-producer.bat --bootstrap-server localhost:9092 --topic test --property parse.key=true --property key.separator=":"
 
 .\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic test --from-beginning
 .\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic test -group testgroup --from-beginning
@@ -83,7 +93,7 @@ Windows에서는 bat
 
 .\bin\windows\kafka-consumer-groups.bat --bootstrap-server localhost:9092 --group testgroup --describe
 .\bin\windows\kafka-consumer-groups.bat --bootstrap-server localhost:9092 --group testgroup --topic test --reset-offsets --to-earliest --execute
-.\bin\windows\kafka-consumer-groups.bat --bootstrap-server localhost:9092 --group testgroup --topic test1 --reset-offsets --to-offset 10 --execute
+.\bin\windows\kafka-consumer-groups.bat --bootstrap-server localhost:9092 --group testgroup --topic test --reset-offsets --to-offset 10 --execute
 ```
 
 # Kafka 커맨드 라인 명령어
@@ -237,5 +247,35 @@ Windows에서는 bat
 --group [그룹명]
 --describe
 ```
+### (3) Kafka Offset Reset
 
+```
+.\bin\windows\kafka-consumer-groups.bat
+--bootstrap-server [아이피:호스트]
+--group [그룹명]
+--topic [토픽명]
+--reset-offsets
+--to-earliest
+--execute
+```
 
+```
+--shift-by <Long> : 컨슈머 오프셋에서 + 또는 - 이동
+--to-offset <Long> : 컨슈머 오프셋을 지정
+--to-latest : 가장 최신(높은숫자) 오프셋으로 지정
+--to-earliest : 가장 이른(낮은숫자) 오프셋으로 지정
+```
+
+--- 특정 파티션만 오프셋 이동하고 싶다면?
+
+```
+
+.\bin\windows\kafka-consumer-groups.bat
+--bootstrap-server [아이피:호스트]
+--group [그룹명]
+--topic [토픽명:파티션숫자]
+--reset-offsets
+--to-earliest
+--to-offset [숫자]
+--execute
+```
