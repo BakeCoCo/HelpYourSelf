@@ -44,7 +44,7 @@ Windows에서는 bat
 
 
 .\bin\windows\zookeeper-server-start.bat config\zookeeper.properties
-.\bin\windows\kafka-server-start.bat config\zookeeper.properties
+.\bin\windows\kafka-server-start.bat config\server.properties
 .\bin\windows\kafka-topics.sh --create --topic test --bootstrap-server localhost:9092 --replication-factor 1 --partitions 3
 .\bin\windows\kafka-console-producer.sh --bootstrap-server localhost:9092 --topic test
 .\bin\windows\kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning
