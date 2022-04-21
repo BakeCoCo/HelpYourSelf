@@ -48,28 +48,7 @@ advertised.listeners=PLAINTEXT://{ipAddress}:9092
 listeners=PLAINTEXT://:9092
 ```
 
-
-
-### kafka 명령어 
-```
-Linux에서는 sh
-Windows에서는 bat
-
-
-.\bin\windows\zookeeper-server-start.bat config\zookeeper.properties
-.\bin\windows\kafka-server-start.bat config\server.properties
-.\bin\windows\kafka-topics.sh --create --topic test --bootstrap-server localhost:9092 --replication-factor 1 --partitions 3
-.\bin\windows\kafka-console-producer.sh --bootstrap-server localhost:9092 --topic test
-.\bin\windows\kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning
-.\bin\windows\kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test -group testgroup --from-beginning
-.\bin\windows\kafka-console-consumer.sh --bootstrap-server localhost:9092 --list
-.\bin\windows\kafka-console-consumer.sh --bootstrap-server localhost:9092 --group testgroup --describe
-.\bin\windows\kafka-console-consumer.sh --bootstrap-server localhost:9092 --group testgroup --topic test --reset-offsets --to-earliest --execute
-.\bin\windows\kafka-console-consumer.sh --bootstrap-server localhost:9092 --group testgroup --topic test1 --reset-offsets --to-offset 10 --execute
-
-```
-
-### kafka config 명령어
+### kafka config설정
 ```
 broker.id : 정수로 된 브로커 번호. 클러스터 내 고유번호로 지정
 listeners : kafka 통신에 사용되는 host:port
@@ -82,6 +61,27 @@ auto.create.topics.enable : 자동으로 토픽 생성여부
 num.partitions : 자동생성된 토픽의 default partition 개수
 message.max.bytes : kafka broker에 쓰려는 메시지 최대 크기
 ```
+
+
+### kafka 명령어 
+```
+Linux에서는 sh
+Windows에서는 bat
+
+
+.\bin\windows\zookeeper-server-start.bat config\zookeeper.properties
+.\bin\windows\kafka-server-start.bat config\server.properties
+.\bin\windows\kafka-topics.bat --create --topic test --bootstrap-server localhost:9092 --replication-factor 1 --partitions 3
+.\bin\windows\kafka-console-producer.bat --bootstrap-server localhost:9092 --topic test
+.\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic test --from-beginning
+.\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic test -group testgroup --from-beginning
+.\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --list
+.\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --group testgroup --describe
+.\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --group testgroup --topic test --reset-offsets --to-earliest --execute
+.\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --group testgroup --topic test1 --reset-offsets --to-offset 10 --execute
+.\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic test --property print.key=true --property key.separator="-"
+```
+
 
 
 
