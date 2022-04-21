@@ -43,10 +43,6 @@ docker container ls
 listeners=PLAINTEXT://:9092
 advertised.listeners=PLAINTEXT://{ipAddress}:9092
 ```
-## config/zookeeper.properties
-```
-listeners=PLAINTEXT://:9092
-```
 
 ### kafka config설정
 ```
