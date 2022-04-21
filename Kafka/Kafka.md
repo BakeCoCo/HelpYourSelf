@@ -11,6 +11,8 @@ Zookeeper는 아직까지 사용해야 하나보다
 
 https://www.youtube.com/watch?v=VJKZvOASvUA
 
+https://github.com/AndersonChoi/tacademy-kafka
+
 ![image](https://user-images.githubusercontent.com/58055835/161549778-62459d5b-e1d2-455b-bc9f-9ada043e4bea.png)
 
 따로 따로 파이프라인을 만들어야 해서 코드의 복잡성이 증가
