@@ -37,12 +37,17 @@ docker container ls
 
 입력하여 bash로 들어감
 
-### 기본세팅
+### 기본세팅 (주석해제)
 ## config/server.properties
 ```
 listeners=PLAINTEXT://:9092
 advertised.listeners=PLAINTEXT://{ipAddress}:9092
 ```
+## config/zookeeper.properties
+```
+listeners=PLAINTEXT://:9092
+```
+
 
 
 ### kafka 명령어 
