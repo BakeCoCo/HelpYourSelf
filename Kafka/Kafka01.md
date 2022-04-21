@@ -206,6 +206,15 @@ Windows에서는 bat
 --from-beginning
 ```
 
+### (3) Partition을 지정해서 보여주는 Consumer
+```
+.\bin\windows\kafka-console-consumer.bat
+--bootstrap-server [아이피:호스트]
+--topic [토픽명]
+--partition [파티션 No]
+--from-beginning
+```
+
 ## 4. Consumer Group
 
 ### (1) 그룹에 속하는 Consumer List 조회
