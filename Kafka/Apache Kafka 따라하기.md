@@ -110,7 +110,7 @@ Maven 설정
 public class Main {
   
   private static String TOPIC_NAME = "test";      // 생성한 토픽명
-  private static String BOOTSTRAP_SERVERS = "localhost:9092";
+  private static String BOOTSTRAP_SERVERS = "localhost:9092";	// Kafka Cluster 주소 [ 클러스터 = 브로커구성 ]
   
   public static void main(String[] args) {
     Map<String,Object> configs = new HashMap<String,Object>();
@@ -224,8 +224,8 @@ public class CustomPartitionDivide implements Partitioner{
 * console창에 직접 입력하여 실험
 */
 public class Main {
-	private static String TOPIC_NAME = "test";
-	private static String BOOTSTRAP_SERVERS = "localhost:9092";
+	private static String TOPIC_NAME = "test";	// 
+	private static String BOOTSTRAP_SERVERS = "localhost:9092";	// Kafka Cluster 주소 [ 클러스터 = 브로커구성 ]
 	
 	public static void main(String[] args) {
 		Map<String,Object> configs = new HashMap<String,Object>();
@@ -268,3 +268,37 @@ kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic test --part
 // 지정된 파티션 및 Key와 Value를 구분하여 출력
 kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic test --partition [숫자] --property print.key=true --property key.separator="-"
 ```
+
+## Simple Consumer Code
+
+```java
+/*
+* Broker에 저장된 Message를 Poll해서 가져온다.
+**/
+public class Main {
+	private static String TOPIC_NAME = "test";	// 토픽명
+	private static String GROUP_ID = "testgroup";	// 그룹명
+	private static String BOOTSTRAP_SERVERS = "localhost:9092";	// Kafka Cluster 주소 [ 클러스터 = 브로커구성 ]
+
+	public static void main(String[] args) {
+
+		Map<String, Object> props = new HashMap<String,Object>();
+		props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVERS);
+		props.put(ConsumerConfig.GROUP_ID_CONFIG, GROUP_ID);
+		props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+		props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+		
+		KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
+		
+		consumer.subscribe(Arrays.asList(TOPIC_NAME));
+		
+	 	while (true) {
+	 		ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(1));
+	 		for (ConsumerRecord<String, String> record : records) {
+	 			System.out.println("Topic : "+record.value());
+			}
+		}
+	}
+}
+```
+
