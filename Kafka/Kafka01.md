@@ -82,10 +82,147 @@ Windows에서는 bat
 .\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic test --property print.key=true --property key.separator="-"
 ```
 
+# Kafka 커맨드 라인 명령어
 
+## 1. Topic 명령어
 
+### (1) 기본 Topic 생성
+```
+.\bin\windows\kafka-topics.bat
+--create
+--topic [토픽명]
+--bootstrap-server [아이피:호스트]
+```
 
+### (2) Topic 생성 옵션
+```
+.\bin\windows\kafka-topics.bat
+--create
+--bootstrap-server [아이피:호스트]
+--topic [토픽명]
+--partitions [파티션 갯수]
+--replication-factor [브로커 복제 개수] 
+--config retention.ms=[토픽의 데이터를 유지할 시간(단위:ms)]
+```
 
-![image](https://user-images.githubusercontent.com/58055835/164142003-9be020dd-92a2-47ea-bfcb-633f3b2b4c78.png)
+### (3) Topic 조회
+```
+.\bin\windows\kafka-topics.bat
+--bootstrap-server [아이피:호스트]
+--list
+```
+
+### (4) Topic 상세 조회
+```
+.\bin\windows\kafka-topics.bat
+--bootstrap-server [아이피:호스트]
+--topic
+--describe
+```
+
+### (5) Topic 수정
+#### --alter 이하의 설정들을 모두 개별적으로 수정 가능
+```
+.\bin\windows\kafka-topics.bat
+--bootstrap-server [아이피:호스트]
+--alter
+--partitions [변경할 파티션 수]
+```
+
+#### --add-config 옵션을 사용하면 기존것을 merge한다.
+```
+.\bin\windows\kafka-topics.bat
+--bootstrap-server [아이피:호스트]
+--alter
+--add-config retention.ms=[토픽의 데이터를 유지할 시간(단위:ms)]
+```
+
+#### --delete-config를 사용한 토픽 설정 삭제
+```
+.\bin\windows\kafka-topics.bat
+--bootstrap-server [아이피:호스트]
+--alter
+--delete-config retention.ms
+```
+
+### (6) json 파일을 활용하여 삭제
+`delete-topic.json`
+``` 
+{
+  "partitions":
+  [
+    {
+      "topic" : "[삭제할 토픽명]",
+      "partition" : "[삭제할 파티션 번호]",
+      "offset" : "[처음부터 삭제할 offset 번호]"
+    }
+  ],
+  "version" : 1
+}
+```
+```
+.\bin\windows\kafka-topics.bat
+--bootstrap-server [아이피:호스트]
+--offset-json-file delete-topic.json
+```
+
+## 2. Producer 명령어
+
+### (1) key가 없고 value만 있는 Producer
+```
+.\bin\windows\kafka-console-producer.bat
+--bootstrap-server [아이피:호스트]
+--topic [토픽명]
+```
+
+### (2) key와 value가 있는 Producer
+```
+.\bin\windows\kafka-console-producer.bat
+--bootstrap-server [아이피:호스트]
+--topic [토픽명]
+--property parse.key=true
+--property key.separator=":"
+```
+
+## 3. Consumer 명령어
+
+### (1) key없이 value만 보여주는 Consumer
+`--from-beginning` : Topic의 첫 Data부터 읽는다.
+```
+.\bin\windows\kafka-console-consumer.bat
+--bootstrap-server [아이피:호스트]
+--topic [토픽명]
+--from-beginning
+```
+
+### (2) key와 value를 보여주는 Consumer
+```
+.\bin\windows\kafka-console-consumer.bat
+--bootstrap-server [아이피:호스트]
+--topic [토픽명]
+--property print.key=true
+--property key.separator="-"
+--group [그룹명 (그룹명이 없는 경우 새로 생성) ]
+--from-beginning
+```
+
+## 4. Consumer Group
+
+### (1) 그룹에 속하는 Consumer List 조회
+```
+.\bin\windows\kafka-consumer-groups.bat
+--bootstrap-server [아이피:호스트]
+--list
+```
+
+### (2) Consumer Group이 어떤 Topic의 Data를 처리하는지 조회
+
+그룹명, 토픽명, 토픽의 파티션 번호, 최신 오프셋, 컨슘한 오프셋, 지연-랙(LAG), 아이디를 알 수 있다.
+```
+.\bin\windows\kafka-consumer-groups.bat
+--bootstrap-server [아이피:호스트]
+--group [그룹명]
+--describe
+```
 
 
