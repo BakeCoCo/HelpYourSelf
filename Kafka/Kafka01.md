@@ -71,15 +71,19 @@ Windows에서는 bat
 
 .\bin\windows\zookeeper-server-start.bat config\zookeeper.properties
 .\bin\windows\kafka-server-start.bat config\server.properties
+
 .\bin\windows\kafka-topics.bat --create --topic test --bootstrap-server localhost:9092 --replication-factor 1 --partitions 3
+.\bin\windows\kafka-topics.bat --bootstrap-server localhost:9092 --list
+
 .\bin\windows\kafka-console-producer.bat --bootstrap-server localhost:9092 --topic test
+
 .\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic test --from-beginning
 .\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic test -group testgroup --from-beginning
-.\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --list
-.\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --group testgroup --describe
-.\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --group testgroup --topic test --reset-offsets --to-earliest --execute
-.\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --group testgroup --topic test1 --reset-offsets --to-offset 10 --execute
 .\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic test --property print.key=true --property key.separator="-"
+
+.\bin\windows\kafka-consumer-groups.bat --bootstrap-server localhost:9092 --group testgroup --describe
+.\bin\windows\kafka-consumer-groups.bat --bootstrap-server localhost:9092 --group testgroup --topic test --reset-offsets --to-earliest --execute
+.\bin\windows\kafka-consumer-groups.bat --bootstrap-server localhost:9092 --group testgroup --topic test1 --reset-offsets --to-offset 10 --execute
 ```
 
 # Kafka 커맨드 라인 명령어
