@@ -37,6 +37,14 @@ docker container ls
 
 입력하여 bash로 들어감
 
+### 기본세팅
+## config/server.properties
+```
+listeners=PLAINTEXT://:9092
+advertised.listeners=PLAINTEXT://{ipAddress}:9092
+```
+
+
 ### kafka 명령어 
 ```
 Linux에서는 sh
@@ -70,11 +78,6 @@ num.partitions : 자동생성된 토픽의 default partition 개수
 message.max.bytes : kafka broker에 쓰려는 메시지 최대 크기
 ```
 
-## Ex) config/server.properties
-```
-listeners=PLAINTEXT://:9092
-advertised.listeners=PLAINTEXT://{ipAddress}:9092
-```
 
 
 
