@@ -247,6 +247,8 @@ public class Main {
 			while(true) {
 				String msg = ""+br.readLine();
 				int len = msg.length();
+				// ProducerRecord<>( 토픽명, 파티션번호, 메시지 )
+				// 파티션 번호는 PARTITIONER_CLASS_CONFIG로 인해 CustomPartitionDivide에서 설정됨
 				record = new ProducerRecord<>(TOPIC_NAME, arr[len%3],arr[len%3]+" : "+msg);
 				producer.send(record);
 			}
