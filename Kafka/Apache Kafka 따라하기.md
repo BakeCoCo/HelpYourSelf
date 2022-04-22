@@ -178,29 +178,20 @@ PARTITIONER_CLASS_CONFIG : 파티션을 구분하는 식별자.
 public class CustomPartitionDivide implements Partitioner{
 	@Override
 	public int partition(String topic, Object key, byte[] keyBytes, Object value, byte[] valueBytes, Cluster cluster) {
-		
 		/*
 		 * 레코드에 메시지 KEY를 지정하지 않은 경우 -> 비정상적인 데이터로 간주하고 InvalidRecordException 발생
 		 * */
-		if(keyBytes == null) {
-			throw new InvalidRecordException("You Need message Key : CustomPartitionDivide.java");
-		}
+		if(keyBytes == null) throw new InvalidRecordException("You Need message Key : CustomPartitionDivide.java");
 		
 		/*
 		 * 메시지 KEY에 따라 레코드가 전달될 파티션을 지정
 		 * */
-		
 		String keyName = (String)key;
-		if(keyName.equals("AA")) {
-			return 0;
-		}else if(keyName.equals("BB")) {
-			return 1;
-		}else if(keyName.equals("CC")) {
-			return 2;
-		}
-		
+		if(keyName.equals("AA")) {return 0;}
+		else if(keyName.equals("BB")) {return 1;}
+		else if(keyName.equals("CC")) {	return 2;}
 		/*
-		 * 메시지 KEY가 존재하지만 "TEST", "SAFE", "APLUS"가 아닌 경우
+		 * 메시지 KEY가 존재하지만 "AA", "BB", "CC"가 아닌 경우
 		 * 해시값을 이용하여 특정 파티션에 매칭되도록 한다.
 		 * */
 		List<PartitionInfo> partitions = cluster.partitionsForTopic(topic);
@@ -419,8 +410,6 @@ while (true) {
 	for (ConsumerRecord<String, String> record : records) {
 		System.out.println("group : testgroup, Topic : test "+record.value());
 	}
-	Map<Topi
-	
 	try {
 		consumer.commitSync();
 	} catch (CommitFailedException e) {
