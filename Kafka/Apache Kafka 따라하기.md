@@ -1,3 +1,7 @@
+# 참고
+- https://github.com/AndersonChoi/tacademy-kafka
+- https://www.logicbig.com/tutorials/misc/kafka.html
+
 # Windows 기준
 
 [Apache Kafka Downloads](https://kafka.apache.org/downloads)
