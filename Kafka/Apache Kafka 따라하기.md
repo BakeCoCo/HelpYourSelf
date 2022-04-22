@@ -27,7 +27,7 @@
 ```
 
 ### Kafka압축해제한 폴더에서 CMD창 연다.
-## 명령어 하나에 CMD창 하나
+## ☆☆명령어 하나에 CMD창 하나☆☆
 #### Windows에서는 sh파일이 아닌 bat파일을 사용해야 해서 다음과 같이 입력.
 
 ### Zookeeper Server Start, Kafka Broker Server Start
