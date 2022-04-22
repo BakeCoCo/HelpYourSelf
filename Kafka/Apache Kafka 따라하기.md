@@ -290,6 +290,7 @@ public class Main {
 		
 		KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
 		
+		// Consumer subscribe(구독)
 		consumer.subscribe(Arrays.asList(TOPIC_NAME));
 		
 	 	while (true) {
@@ -301,4 +302,143 @@ public class Main {
 	}
 }
 ```
+
+
+### Consumber subscribes 
+
+```
+// 1개 토픽만 구독
+consumer.subscribe(Arrays.asList(TOPIC_NAME));
+
+// n개 토픽 구독
+// 정규 표현식(regex)를 통한 토픽 구독
+consumer.subscribe(Pattern.compile("test.*"));
+
+// 특정 토픽의 파티션 구독
+// Key를 포함한 Record를 Consume할 때, 특정 파티션을 할당하고 싶으면
+consumer.assign(Collections.singleton(new TopicPartition("test", 1)));
+```
+
+### Consumer Options
+
+-- 필수옵션
+```
+BOOTSTRAP_SERVERS_CONFIG : 카프카 클러스터에 연결하기 위한 브로커 목록
+
+GROUP_ID_CONFIG : 컨슈머 그룹 ID
+
+KEY_DESERIALIZER_CLASS_CONFIG : 메시지 Key 역직렬화에 사용되는 클래스
+
+VALUE_DESERIALIZER_CLASS_CONFIG : 메시지 Key 역직렬화에 사용되는 클래스
+```
+
+-- 선택옵션 -Default값 존재
+```
+ENABLE_AUTO_COMMIT_CONFIG : 자동 오프셋 커밋 여부
+[true = 일정간격(AUTO_COMMIT_INTERVAL_MS_CONFIG) 마다 poll() 메서드를 호출시 자동 commit]
+[commit 관련 코드를 작성할 필요가 없어 편리함]
+[속도가 가장 빠름]
+[데이터 중복, 유실이 발생할 수 있음 = (은행,카드 X),(센서,GPS O)]
+
+AUTO_COMMIT_INTERVAL_MS_CONFIG : 자동 오프셋 커밋일 때 interval 시간
+
+AUTO_OFFSET_RESET_CONFIG : 신규 컨슈머그룹일때 읽을 파티션의 오프셋 위치
+
+CLIENT_ID_CONFIG : 클라이언트 식별값
+
+MAX_POLL_RECORDS_CONFIG : poll() 메서드 호출시 반환되는 레코드의 최대 갯수
+
+SESSION_TIMEOUT_MS_CONFIG : 컨슈머가 브로커와 연결이 끊기는 시간
+```
+
+
+### 데이터 중복이 발생시키는 방법
+
+### ENABLE_AUTO_COMMIT_CONFIG = true
+
+```java
+public class Main {
+	private static String TOPIC_NAME = "test";
+	private static String GROUP_ID = "testgroup";
+	private static String BOOTSTRAP_SERVERS = "localhost:9092";
+
+	public static void main(String[] args) {
+		
+		//Properties configs = new Properties();
+		Map<String, Object> props = new HashMap<String,Object>();
+		props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVERS);
+		props.put(ConsumerConfig.GROUP_ID_CONFIG, GROUP_ID);
+		props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+		props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+		props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, true);
+		props.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG,60000); // 60,000 ms 마다 commit
+		
+		KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
+		
+		consumer.subscribe(Arrays.asList(TOPIC_NAME));
+	 	while (true) {
+	 		ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(1000));
+	 		for (ConsumerRecord<String, String> record : records) {
+	 			System.out.println("group : testgroup, Topic : test "+record.value());
+			}
+		}
+	}
+}
+```
+
+![image](https://user-images.githubusercontent.com/58055835/164573389-fc10b04f-da2f-4b62-852f-0e43a3992436.png)
+
+### ★Reboot Consumer★
+
+- 60초 마다 Commit 하기 때문에 Commit이 안된 데이터가 중복 출력됨
+
+- 데이터 중복처리 
+
+--- 주문, 결제, 문자 처럼 데이터가 중복처리되면 안되는것들에선 사용 X
+
+### ★데이터 중복을 막을 수 있는 방법★
+- 오토 커밋을 사용하지만 컨슈머가 죽지 않도록 잘 보살핀다.
+
+--> ★불가능★ 서버/애플리케이션은 언젠가 모두 죽어..... ex)배포
+
+- 오토 커밋을 사용하지 않는다.
+
+--> Kafka Consumer의 `commitSync()`, `commitAsync()` 함수를 사용
+
+
+
+
+### ENABLE_AUTO_COMMIT_CONFIG = false
+
+```java
+........동일생략
+props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
+
+while (true) {
+	ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(1000));
+	for (ConsumerRecord<String, String> record : records) {
+		System.out.println("group : testgroup, Topic : test "+record.value());
+	}
+	Map<Topi
+	
+	try {
+		consumer.commitSync();
+	} catch (CommitFailedException e) {
+		System.err.println("commit failed");
+	}
+}
+```
+
+1)) commitSync() : 동기 커밋
+- ConsumerRecord 처리 순서를 보장함
+- 가장 느림
+- poll() 메서드로 반환된 ConsumerRecord의 마지막 Offset을 커밋
+- Map<TopicPartition, OffsetAndMetadata> 를 통해 Offset지정 커밋 가능 [어떻게하지]
+
+
+2)) commitAsync() : 비동기 커밋
+- 동기 커밋보다 빠름
+- 중복 발생 가능
+- 일시적인 통신문제로 이전 Offset보다 이후 Offset이 먼저 커밋될 때 ConsumerRecord 처리 순서를 보장하지 못함
+- 처리 순서가 중요한 서비스(주문, 재고관리 등)에서는 사용이 제한됨
 
