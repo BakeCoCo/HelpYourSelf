@@ -12,3 +12,4 @@ rmiregistry -J-classpath -Jclasses
 
 java -classpath testClasses test.rmi.RCMain 1 2 3 4 5
 
+rmic -classpath . LoggingTimeImpl
