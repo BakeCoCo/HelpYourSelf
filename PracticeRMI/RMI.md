@@ -57,10 +57,16 @@ public class HelloServer extends UnicastRemoteObject implements HelloService {
 ```
 Open CMD in RMI Folder
 
-javac *.java
+// create class file
+CMD[1] : javac *.java
 
+// rmi registry start
 CMD[1] : start rmiregistry
+
+// Server Start
 CMD[1] : java HelloServer
+
+// Client Start and input arguments
 CMD[2] : java Client 1 2 3 4 5
 ```
 
