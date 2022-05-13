@@ -63,3 +63,6 @@ CMD[1] : start rmiregistry
 CMD[1] : java HelloServer
 CMD[2] : java Client 1 2 3 4 5
 ```
+
+![image](https://user-images.githubusercontent.com/58055835/168197266-27ef20a4-0cd0-435e-9b79-3b5462b3539b.png)
+
