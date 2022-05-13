@@ -2,32 +2,51 @@
 
 = 자바 원격 메소드 호출
 
+```java
+// Interface extends Remote
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 
+public interface HelloService extends Remote {
+    public String echo(String msg) throws RemoteException;
+}
+```
 
+```java
+// 호출용 Client
+public class Client {
+    public static void main(String[] args) throws MalformedURLException, NotBoundException, RemoteException {
+        HelloService service = ( HelloService ) Naming.lookup("rmi://localhost:5099/hello");
+        for(int i=0; i<args.length; i++){
+            service.echo(i+"번째 args 클라이언트 호출 : "+args[i]);
+        }
+        System.out.println(" CLIENT END "+service.echo("Bye Server" + " " +service.getClass().getName()));
+    }
+}
+```
 
+```java
+//  Server
+import java.rmi.RemoteException;
+import java.rmi.registry.*;
+import java.rmi.server.UnicastRemoteObject;
 
-javac -d testClasses RSInterface.java RSMain.java RCMain.java -encoding UTF-8
+public class HelloServer extends UnicastRemoteObject implements HelloService {
 
-rmiregistry -J-classpath -Jclasses
+    protected HelloServer() throws RemoteException {
+        super();
+    }
 
-java -classpath testClasses test.rmi.RCMain 1 2 3 4 5
+    @Override
+    public String echo(String msg) throws RemoteException {
+        System.out.println("From server : "+msg);
+        return msg;
+    }
 
-rmic -classpath . LoggingTimeImpl
-
-
-
-PS C:\IDEA\workspace\practiceRMI\src\main\java\test\rmi> rmic -classpath . test.rmi.RSMain
-
-
-Warning: generation and use of skeletons and static stubs for JRMP
-is deprecated. Skeletons are unnecessary, and static stubs have
-been superseded by dynamically generated stubs. Users are
-encouraged to migrate away from using rmic to generate skeletons and static
-stubs. See the documentation for java.rmi.server.UnicastRemoteObject.
-
-
-PS C:\IDEA\workspace\practiceRMI\src\main\java\test\rmi>
-
-
-
-UnicastRemoteObject 가 있는 Server가 Stub만듬
+    public static void main(String[] args) throws RemoteException {
+        Registry registry = LocateRegistry.createRegistry(5099);
+        registry.rebind("hello", new HelloServer());
+        System.out.println("[## SERVER START ##]");
+    }
+}
+```
