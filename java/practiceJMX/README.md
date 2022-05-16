@@ -73,7 +73,7 @@ public class MbeanController implements AplusConfigurationMBean{
 	public void setName(String name) {	this.name = name;	}
 	public int getValX() {	return valX;  }
 	public int getValY() {	return valY;	}
-  public void setValX(int valX) {	this.valX = valX;	}
+	public void setValX(int valX) {	this.valX = valX;	}
 	public void setValY(int valY) {	this.valY = valY;	}
 	
 	@Override
