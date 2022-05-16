@@ -87,6 +87,8 @@ public class MbeanController implements AplusConfigurationMBean{
 ```java
 // interface
 public interface AplusConfigurationMBean {
+
+	// 인자값을 아무것도 안받는 이유는 Controller에서 private으로 X,Y값과 NAME을 SET해준후 출력하게 만들었기 때문이다.
 	public int add();
 	public int sub();
 	public int mul();
