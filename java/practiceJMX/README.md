@@ -47,7 +47,7 @@ public class MbeanExporter{
     
     // [ put을 통해 Jconsole에 MBeans를 SET한다. ]
 		beans.put("mbeanController:name=MbeanController", mbeanController);
-    beans.put("testMBean:name=TESTBEANS", mbeanController);
+		beans.put("testMBean:name=TESTBEANS", mbeanController);
 		mx.setBeans(beans);
 		return mx;
 	}
