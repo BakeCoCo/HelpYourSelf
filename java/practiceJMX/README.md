@@ -5,30 +5,21 @@
 MBean이라는 객체로 표현된다.
 
 
-### jconsole로 모니터링
+## Spring없이 MBean 등록하는 방법 (예제)
 
-mBean으로 JavaBean 오브젝트를 통해 애플리케이션, 디바이스, 서비스를 원격으로 제어 가능
+```java
+import java.lang.management.ManagementFactory;
+import javax.management.MBeanServer;
+import javax.management.ObjectName;
+import org.example.Example;
 
-mBean들은 mBean 서버에 등록되며, mBean 서버는 리소스에 접근하는 모든 원격 매니저를 관리한다.
+...
 
-jconsole은 JDK/bin 폴더에 있다.
-
-C:/Program Files/Java/jdk1.8.0_311/bin/jconsole.exe
-
-실행하면 다음 화면과 같이 나타난다.
-
-![image](https://user-images.githubusercontent.com/58055835/168519213-af1a7166-64cc-4707-9016-165b1c76dd7e.png)
-
-현재 실행중인 Local 프로세스목록
-
-실행하면 이것저것 많은데 `MBeans`를 사용할 것이다.
-
-![image](https://user-images.githubusercontent.com/58055835/168519434-0f35d00b-ee45-4f8c-8ac4-9e15278adf41.png)
-
-현재 mbeanController 이라는 MBeans가 있고 그 아래 `Operations`로 원격으로 메소드를 실행할 수 있다.
-
-setX와 setY로 값을 세팅하고 add, sub, div, mul을 통해 더하고 빼고 곱하고 나누기를 출력할 수 있게 만들었다.
-
+MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
+Object mbean = new Example();
+ObjectName name = new ObjectName("org.example.MyApplication:name=Example");
+mbs.registerMBean(mbean, name);
+```
 ## Spring으로 MBean 등록하는 방법
 
 `MBeanExporter`를 사용하면 된다.
@@ -104,19 +95,34 @@ public interface AplusConfigurationMBean {
 }
 ```
 
-## Spring없이 MBean 등록하는 방법 (예제)
 
-```java
-import java.lang.management.ManagementFactory;
-import javax.management.MBeanServer;
-import javax.management.ObjectName;
-import org.example.Example;
+### jconsole로 모니터링
 
-...
+mBean으로 JavaBean 오브젝트를 통해 애플리케이션, 디바이스, 서비스를 원격으로 제어 가능
 
-MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
-Object mbean = new Example();
-ObjectName name = new ObjectName("org.example.MyApplication:name=Example");
-mbs.registerMBean(mbean, name);
+mBean들은 mBean 서버에 등록되며, mBean 서버는 리소스에 접근하는 모든 원격 매니저를 관리한다.
 
-```
+jconsole은 JDK/bin 폴더에 있다.
+
+C:/Program Files/Java/jdk1.8.0_311/bin/jconsole.exe
+
+실행하면 다음 화면과 같이 나타난다.
+
+![image](https://user-images.githubusercontent.com/58055835/168519213-af1a7166-64cc-4707-9016-165b1c76dd7e.png)
+
+현재 실행중인 Local 프로세스목록
+
+실행하면 이것저것 많은데 `MBeans`를 사용할 것이다.
+
+![image](https://user-images.githubusercontent.com/58055835/168519434-0f35d00b-ee45-4f8c-8ac4-9e15278adf41.png)
+
+현재 mbeanController 이라는 MBeans가 있고 그 아래 `Operations`로 원격으로 메소드를 실행할 수 있다.
+
+setX와 setY로 값을 세팅하고 add, sub, div, mul을 통해 더하고 빼고 곱하고 나누기를 출력할 수 있게 만들었다.
+
+
+## 여러 MBean 서버 인스턴스 다루기
+
+`MBeanExporter`는 MBean 서버 인스턴스를 가져와 MBean을 암시적으로 등록하는 용도로 사용한다.
+
+
