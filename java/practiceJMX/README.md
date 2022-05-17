@@ -29,6 +29,10 @@ C:/Program Files/Java/jdk1.8.0_311/bin/jconsole.exe
 
 setX와 setY로 값을 세팅하고 add, sub, div, mul을 통해 더하고 빼고 곱하고 나누기를 출력할 수 있게 만들었다.
 
+## Spring으로 MBean 등록하는 방법
+
+`MBeanExporter`를 사용하면 된다.
+
 ```java
 // MbeanExporter
 import java.util.HashMap;
@@ -98,4 +102,21 @@ public interface AplusConfigurationMBean {
 	public String name();
 	
 }
+```
+
+## Spring없이 MBean 등록하는 방법 (예제)
+
+```java
+import java.lang.management.ManagementFactory;
+import javax.management.MBeanServer;
+import javax.management.ObjectName;
+import org.example.Example;
+
+...
+
+MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
+Object mbean = new Example();
+ObjectName name = new ObjectName("org.example.MyApplication:name=Example");
+mbs.registerMBean(mbean, name);
+
 ```
