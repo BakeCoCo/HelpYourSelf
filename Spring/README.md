@@ -1,5 +1,53 @@
 # Spring 5 Recipes 참고
 
+```java
+// SequenceGenerator
+import java.util.concurrent.atomic.AtomicInteger;
+
+public class SequenceGenerator {
+    private String prefix;
+    private String suffix;
+    private int initial;
+    private final AtomicInteger counter = new AtomicInteger();
+
+    public SequenceGenerator() {}
+    public String getPrefix() {return prefix;}
+    public void setPrefix(String prefix) {this.prefix = prefix;}
+    public String getSuffix() {return suffix;}
+    public void setSuffix(String suffix) {this.suffix = suffix;}
+    public int getInitial() {return initial;}
+    public void setInitial(int initial) {this.initial = initial;}
+
+    @Override
+    public String toString() {
+        return "SequenceGenerator{" +
+                "prefix='" + prefix + '\'' +
+                ", suffix='" + suffix + '\'' +
+                ", initial=" + initial +
+                ", counter=" + counter +
+                '}';
+    }
+}
+```
+
+```java
+// SequenceGeneratorConfiguration
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class SequenceGeneratorConfiguration {
+
+    @Bean
+    public SequenceGenerator sequenceGenerator(){
+        SequenceGenerator seqgen = new SequenceGenerator();
+        seqgen.setPrefix("30");
+        seqgen.setSuffix("A");
+        seqgen.setInitial(100000);
+        return seqgen;
+    }
+}
+```
 
 ### @Configuration
 ```
