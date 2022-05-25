@@ -60,11 +60,13 @@ public class User {
     }
 }
 ```
+
 ```java
 public interface GameTest {
     public void print(User user);
 }
 ```
+
 ```java
 public class GameStart implements GameTest{
 
@@ -74,6 +76,7 @@ public class GameStart implements GameTest{
     }
 }
 ```
+
 ```java
 public class Main {
     public static void main(String[] args) {
@@ -85,6 +88,14 @@ public class Main {
     }
 }
 ```
+
+```
+
+결과 : LHJ회원이 Spring을 플레이합니다.
+
+```
+
+
 
 ```
 IoC컨테이너는 두 종류로 나뉜다.
