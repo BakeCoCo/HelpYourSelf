@@ -2,6 +2,86 @@
 
 ### 패키지 com.example.practicespring 에서 테스트
 
+### POJO (Plain Old Java Object)
+```java
+//오래된 방식의 간단한 자바 오브젝트 라는 의미
+
+//기본형태 예시)
+public class User {
+    private String user;
+    private String pass;
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
+}
+
+```
+
+
+### 자바로 POJO 구성하기
+
+```java
+// SequenceGenerator
+import java.util.concurrent.atomic.AtomicInteger;
+
+public class SequenceGenerator {
+    private String prefix;
+    private String suffix;
+    private int initial;
+    private final AtomicInteger counter = new AtomicInteger();
+
+    public SequenceGenerator() {}
+    public String getPrefix() {return prefix;}
+    public void setPrefix(String prefix) {this.prefix = prefix;}
+    public String getSuffix() {return suffix;}
+    public void setSuffix(String suffix) {this.suffix = suffix;}
+    public int getInitial() {return initial;}
+    public void setInitial(int initial) {this.initial = initial;}
+
+    @Override
+    public String toString() {
+        return "SequenceGenerator{" +
+                "prefix='" + prefix + '\'' +
+                ", suffix='" + suffix + '\'' +
+                ", initial=" + initial +
+                ", counter=" + counter +
+                '}';
+    }
+}
+```
+
+```java
+// SequenceGeneratorConfiguration
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class SequenceGeneratorConfiguration {
+
+    @Bean
+    public SequenceGenerator sequenceGenerator(){
+        SequenceGenerator seqgen = new SequenceGenerator();
+        seqgen.setPrefix("30");
+        seqgen.setSuffix("A");
+        seqgen.setInitial(100000);
+        return seqgen;
+    }
+}
+```
+
 ### IoC 컨테이너란
 
 어떠한 객체가 사용하는 의존객체를 직접만들어서 사용하는것이 아닌, `주입을 받아서 사용하는 방법.`
@@ -91,85 +171,6 @@ SequenceGenerator{prefix='30', suffix='A', initial=100000, counter=0}
 SequenceGenerator{prefix='30', suffix='A', initial=100000, counter=0}
 ```
 
-### POJO (Plain Old Java Object)
-```java
-//오래된 방식의 간단한 자바 오브젝트 라는 의미
-
-//기본형태 예시)
-public class User {
-    private String user;
-    private String pass;
-
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
-    }
-
-    public String getPass() {
-        return pass;
-    }
-
-    public void setPass(String pass) {
-        this.pass = pass;
-    }
-}
-
-```
-
-
-### 자바로 POJO 구성하기
-
-```java
-// SequenceGenerator
-import java.util.concurrent.atomic.AtomicInteger;
-
-public class SequenceGenerator {
-    private String prefix;
-    private String suffix;
-    private int initial;
-    private final AtomicInteger counter = new AtomicInteger();
-
-    public SequenceGenerator() {}
-    public String getPrefix() {return prefix;}
-    public void setPrefix(String prefix) {this.prefix = prefix;}
-    public String getSuffix() {return suffix;}
-    public void setSuffix(String suffix) {this.suffix = suffix;}
-    public int getInitial() {return initial;}
-    public void setInitial(int initial) {this.initial = initial;}
-
-    @Override
-    public String toString() {
-        return "SequenceGenerator{" +
-                "prefix='" + prefix + '\'' +
-                ", suffix='" + suffix + '\'' +
-                ", initial=" + initial +
-                ", counter=" + counter +
-                '}';
-    }
-}
-```
-
-```java
-// SequenceGeneratorConfiguration
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
-@Configuration
-public class SequenceGeneratorConfiguration {
-
-    @Bean
-    public SequenceGenerator sequenceGenerator(){
-        SequenceGenerator seqgen = new SequenceGenerator();
-        seqgen.setPrefix("30");
-        seqgen.setSuffix("A");
-        seqgen.setInitial(100000);
-        return seqgen;
-    }
-}
-```
 
 ### @Configuration
 ```
