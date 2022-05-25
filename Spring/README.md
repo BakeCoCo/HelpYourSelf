@@ -7,7 +7,6 @@
 3. DI   (Dependency Injection)          의존성 주입
 4. AOP  (Aspect-Oriented Programming)   관점 지향 프로그래밍
 
-
 ## POJO (Plain Old Java Object) 오래된 방식의 자바객체
 ```java
 // 기본 예 Getter, Setter라고 생각하면 된다.
@@ -169,4 +168,23 @@ Join Point의 상세한 스펙을 정의한것.
 어디에 적용해야 하는지에 대한 정보를 가지고 있다.
 "A클래스에 B메서드를 적용할 때 호출을 해라." 와 같은 구체적인 정보를 준다.
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
