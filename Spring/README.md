@@ -1,5 +1,34 @@
 # Spring 5 Recipes 참고
 
+
+### POJO (Plain Old Java Object)
+```
+오래된 방식의 간단한 자바 오브젝트 라는 의미
+
+기본형태 예시)
+public class User {
+    private String user;
+    private String pass;
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
+}
+
+```
+
 ```java
 // SequenceGenerator
 import java.util.concurrent.atomic.AtomicInteger;
