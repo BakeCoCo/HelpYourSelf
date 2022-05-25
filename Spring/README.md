@@ -171,6 +171,51 @@ Join Point의 상세한 스펙을 정의한것.
 
 
 
+## @Configuration
+
+```java
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class DemoCGLIB {
+    private int counter;
+
+    //@Bean
+    public String something(){
+        System.out.println("method invoked");
+        return String.valueOf(++counter);
+    }
+
+    public static void main(String... strings) {
+        AnnotationConfigApplicationContext context =
+                new AnnotationConfigApplicationContext(DemoCGLIB.class);
+        DemoCGLIB bean = context.getBean(DemoCGLIB.class);
+        System.out.println(bean.something());
+        System.out.println(bean.something());
+        System.out.println(bean.something());
+    }
+}
+
+@Bean이 있을때 실행한 결과
+method invoked
+1
+1
+1
+
+@Bean이 없을때 실행한 결과
+method invoked
+1
+method invoked
+2
+method invoked
+3
+
+@Configuration 클래스는 CGLIB에 의해 하위 분류되며 @Bean 메서드를 poxying하여 라이프사이클을 제어한다.
+이러한 프록시 방법으로 생성된 Bean 인스턴스는 캐시된다.
+이것이 Bean 메서드가 여러 번 호출될 경우 동일한 인스턴스를 반환하는 이유다.
+```
 
 
 
