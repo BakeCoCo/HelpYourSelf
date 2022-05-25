@@ -1,310 +1,78 @@
-# Spring 5 Recipes 참고
+# Spring 5 Recipes
 
+## 1장 스프링 개발 툴
+    스프링 프레임워크를 지원하는 툴과 사용법을 배운다.
+    
+## 2장 스프링 코어
+    스프링이 무엇이고, 어떻게 설정하는지, 어떻게 사용하는지 전반적으로 살펴본다.
 
-### POJO (Plain Old Java Object)
-```java
-//오래된 방식의 간단한 자바 오브젝트 라는 의미
+## 3장 스프링 MVC
+    웹 기반 애플리케이션 개발 프레임워크인 스프링 MVC를 배운다.
 
-//기본형태 예시)
-public class User {
-    private String user;
-    private String pass;
+## 4장 스프링 REST
+    스프링에서 REST형 웹 서비스를 구현한다.
 
-    public String getUser() {
-        return user;
-    }
+## 5장 스프링 MVC : 비동기 처리
+    스프링 MVC에서 요청을 비동기 방식으로 처리한다.
 
-    public void setUser(String user) {
-        this.user = user;
-    }
+## 6장 스프링 소셜
+    스프링 소셜로 소셜 네트워크를 손쉽게 연계한다.
 
-    public String getPass() {
-        return pass;
-    }
+## 7장 스프링 시큐리티
+    스프링 시큐리티를 개괄하고 애플리케이션 보안을 강화한다.
 
-    public void setPass(String pass) {
-        this.pass = pass;
-    }
-}
+## 8장 스프링 모바일
+    스프링 모바일로 애플리케이션에서 모바일 장치를 감지하고 사용한다.
+
+## 9장 데이터 액세스
+    스프링에서 JDBC, 하이버네이트, JPA등의 API로 데이터 저장소와 통신한다.
+
+## 10장 스프링 트랜잭션 관리
+    스프링의 철저한 트랜잭션 관리 장치 이면에 숨겨진 주요 개념을 공부한다.
+
+## 11장 스프링 배치
+    스프링 배치 프레임워크를 사용해 전통적으로 메인프레임 영역이었던 솔루션을 모델링한다.
+
+## 12장 스프링 NoSQL
+    다양한 NoSQL 기술과 하둡을 응용한 빅 데이터에 이르기까지,
+    스프링 데이터의 갖가지 포트폴리오 프로젝트를 소개한다.
+
+## 13장 스프링 자바 엔터프라이즈 서비스와 원격 기술
+    JMX지원, 스케줄링, 이메일지원, RPC제반기능, 스프링 웹 서비스 프로젝트를 다룬다.
+
+## 14장 스프링 메시징
+    스프링에서 JMS 및 RabbitMQ를 활용해 메시지 지향 미들웨어를 사용하는 방법과 스프링 추상화로
+    단순화 하는 방법을 배운다.
+
+## 15장 스프링 인티그레이션
+    스프링 인티그레이션 프레임워크로 서로 다른 종류의 서비스와 데이터를 연계하는 기술을 설명한다.
+
+## 16장 스프링 테스트
+    스프링 프레임워크로 단위 테스트를 수행한다.
+
+## 17장 그레일즈
+    관례 기반의 Groovy코드를 조합해서 생산성을 높이는 그레일즈 프레임워크를 알아본다.
+    
+## 부록A 클라우드에 배포하기
+    Pivotal사의 클라우드파운드리 솔루션을 이용해 자바 (웹) 애플리케이션을 클라우드 환경에 배포한다.
+
+## 부록B 캐싱
+    스프링 캐싱 추상화를 구성하고 애플리케이션에 투명한 캐시 기능을 부여한다.
+
+## 부록C 예제 소스 실습 안내
+    예제로 실습하는 방법을 안내한다.
+
+### 예제 코드 내려받기
 
 ```
+이일웅 역자 깃허브
+https://github.com/nililee/spring-5-recipes
 
+한빛 미디어
+https://www.hanbit.co.kr/src/10103
 
-### 자바로 POJO 구성하기
-
-```java
-// SequenceGenerator
-import java.util.concurrent.atomic.AtomicInteger;
-
-public class SequenceGenerator {
-    private String prefix;
-    private String suffix;
-    private int initial;
-    private final AtomicInteger counter = new AtomicInteger();
-
-    public SequenceGenerator() {}
-    public String getPrefix() {return prefix;}
-    public void setPrefix(String prefix) {this.prefix = prefix;}
-    public String getSuffix() {return suffix;}
-    public void setSuffix(String suffix) {this.suffix = suffix;}
-    public int getInitial() {return initial;}
-    public void setInitial(int initial) {this.initial = initial;}
-
-    @Override
-    public String toString() {
-        return "SequenceGenerator{" +
-                "prefix='" + prefix + '\'' +
-                ", suffix='" + suffix + '\'' +
-                ", initial=" + initial +
-                ", counter=" + counter +
-                '}';
-    }
-}
+에이프레스
+http://www.apress.com/9781484227893
 ```
 
-```java
-// SequenceGeneratorConfiguration
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
-@Configuration
-public class SequenceGeneratorConfiguration {
-
-    @Bean
-    public SequenceGenerator sequenceGenerator(){
-        SequenceGenerator seqgen = new SequenceGenerator();
-        seqgen.setPrefix("30");
-        seqgen.setSuffix("A");
-        seqgen.setInitial(100000);
-        return seqgen;
-    }
-}
-```
-
-### @Configuration
-```
-@Configuration은 이 클래스가 구성 클래스임을 스프링에 알림
-그리고 내부에 정의된 Bean 인스턴스 즉, @Bean을 붙인(Bean 인스턴스를 생성해 반환하는) 자바 메서드를 찾는다.
-```
-
-### @Bean
-```
-@Bean을 붙이면 그 메서드와 동일한 이름의 빈이 생성.
-Bean의 이름을 따로 명시하려면 name 속성을 적는다.
-
-예) @Bean (name = "Test") = Test라는 이름의 빈을 만든다.
-이렇게 이름을 지정하면 메서드명은 무시된다.
-```
-
-### IoC 컨테이너 (Inversion of Control) 초기화하여 Annotation 스캐닝 하기
-```
-애너테이션을 붙인 자바클래스를 스캐닝 하려면 IoC컨테이너를 인스턴스화 해야한다.
-그래야 @Configuration, @Bean을 발견하고 나중에 IoC컨테이너에서 Bean 인스턴스를 가져올수 있다.
-
-Spring은
-1. Bean Factory
-2. Application Context 
-
-2가지 IoC컨테이너를 제공한다.
-구성 파일은 두 컨테이너 모두 동일.
-```
-
-### ApplicationContext
-```java
-/*
-    ApplicationContext는 기본 기능에 충실하면서 BeanFactory보다 발전된 기능을 가지고 있다.
-    그래서 Resource에 제약받는 상황이 아니라면 ApplicationContext를 사용하는게 좋다.
-*/
-//기본 사용 예)
-ApplicationContext context = new AnnotationConfigApplicationContext(클래스명.class);
-```
-
-### IoC 컨테이너에서 POJO 인스턴스/빈 가져오기
-```java
-/*
-    Configuration 클래스에 선언된 Bean을 BeanFactory 또는 ApplicationContext에서 가져오려면
-    유일한 Bean이름을 getBean() 메서드의 인수로 호출한다.
-    getBean() 메서드는 java.lang.Object형으로 반환하므로 Type에 맞게 캐스팅한다.
-*/
-//기본 사용 예1)
-//가져올 Configuration에 있는 Bean을 가져오는것이니
-Configuration클래스명 변수명 = (Configuration클래스명) context.getBean(Bean클래스명);
-
-SequenceGenerator generator = (SequenceGenerator) context.getBean("sequenceGenerator");
-
-//기본 사용 예2)
-//캐스팅을 안 하려면 getBean() 메서드의 두 번째 인수에 Bean클래스명을 지정.
-SequenceGenerator generator = context.getBean("sequenceGenerator",SequenceGenerator.class);
-
-//기본 사용 예3)
-//Bean이 1개 뿐이라면 이름을 생략할 수 있다.
-SequenceGenerator generator = context.getBean(SequenceGenerator.class);
-
-//이런 식으로 POJO 인스턴스/빈을 스프링 외부에서 생성자를 이용해 여느 객체처럼 사용할 수 있다.
-```
-
-```java
-// Main
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
-public class Main {
-    public static void main(String[] args) {
-        ApplicationContext context = new AnnotationConfigApplicationContext(SequenceGeneratorConfiguration.class);
-        SequenceGenerator generator = context.getBean(SequenceGenerator.class);
-        System.out.println(generator.toString());
-        System.out.println(generator.toString());
-    }
-}
-```
-
-```java
-//실행 결과
-SequenceGenerator{prefix='30', suffix='A', initial=100000, counter=0}
-SequenceGenerator{prefix='30', suffix='A', initial=100000, counter=0}
-```
-
-### POJO 클래스에 @Component를 붙여 DAO Bean 생성하기
-```
-POJO는 대부분 DB나 유저 입력을 활용해 인스턴스로 만든다.
-
-이번엔
-1. Domain클래스
-2. DAO(Data Access Object)
-    를 이용해 POJO를 생성한다.
-
-이번에 하는것이 기초역할을 하므로 반드시 이런 구조에 익숙해져야 한다.
-```
-
-```java
-// id, prefix, suffix 3프로퍼티를 지닌 Sequence 도메인 클래스를 생성.
-public class Sequence {
-    private final String id;
-    private final String prefix;
-    private final String suffix;
-
-    public Sequence(String id,String prefix,String suffix) {
-        this.id = id;
-        this.prefix = prefix;
-        this.suffix = suffix;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public String getPrefix() {
-        return prefix;
-    }
-
-    public String getSuffix() {
-        return suffix;
-    }
-}
-```
-
-
-```java
-// DB 데이터를 엑세스 처리하는 DAO 인터페이스 생성.
-public interface SequenceDao {
-    public Sequence getSequence(String sequenceId);
-    public int getNextValue(String sequenceId);
-}
-```
-
-```java
-// 실제로는 데이터 엑세스 로직을 DAO인터페이스에 구현하겠지만
-// 편의상 하드코딩한다.
-import org.springframework.stereotype.Component;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
-
-// Component에 sequenceDao를 넣으면 스프링은 이 클래스를 이용해 POJO를 생성한다.
-@Component("sequenceDao")
-public class SequenceDaoImpl implements SequenceDao{
-
-    private final Map<String,Sequence> sequenceMap = new HashMap<>();
-    private final Map<String, AtomicInteger> values = new HashMap<>();
-
-    public SequenceDaoImpl() {
-        sequenceMap.put("IT",new Sequence("IT","30","A"));
-        values.put("IT", new AtomicInteger(10000));
-    }
-
-    @Override
-    public Sequence getSequence(String sequenceId) {
-        return sequenceMap.get(sequenceId);
-    }
-
-    @Override
-    public int getNextValue(String sequenceId) {
-        AtomicInteger value = values.get(sequenceId);
-        return value.getAndIncrement();
-    }
-}
-```
-
-### Component
-```
-@Component는 스프링이 발견할 수 있게 POJO에 붙이는 범용 Annotation이다.
-스프링에는 Persistence(영속화), Service, Presentation(표현), 3Layer(계층)이 있는데
-3Layer 에는 @Repository, @Service, @Controller가 각각 3Layer를 가리키는 Annotation이다.
-
-POJO의 쓰임새를 잘 모르면 그냥 @Component를 붙여도 되지만
-특정 용도에 맞는 혜택을 누리려면 구체적으로 명시하는 편이 좋다.
-
-예) @Repository는 발생한 예외를 DataAccessException으로 감싸 던지므로 디비깅 시 유리함.
-```
-
-### Annotation을 스캐닝하는 필터로 IoC컨테이너 초기화 하기.
-```
-기본적으로 스프링은
-@Configuration
-@Bean
-@Component
-@Repository
-@Service
-@Controller
-가 달린 클래스를 모두 감지한다.
-
-이때 하나 이상의 포함/제외 Filter를 적용해서 Scanning 과정을 Customizing할 수 있다.
-
-Filter표현식은 4종류가 있다.
-annotation , assignable은 각각 필터 대상의 Annotation Type및 Class/Interface 를 지정하며
-regex, aspectj는 각각 정규표현식과 AspectJ 포인트컷 표현식으로 Class를 매치하는 용도로 쓰인다.
-```
-
-```java
-@ComponentScan(
-    includeFilters = {
-        @ComponentScan.Filter(
-            // 이름에 Dao나 Service가 포함된 클래스를 Include
-            // Annotation이 달려있지 않은 클래스도 Include한다.
-            type = FilterType.REGEX,
-            pattern = {"com.example.practicespring.*Dao",
-                       "com.example.practicespring.*Service"})
-    },
-    excludeFilters = {
-        @ComponentScan.Filter(
-            // @Controller Annotation은 exclude한다.
-            type = FilterType.ANNOTATION,
-            classes = {org.springframework.stereotype.Controller.class})
-    }
-)
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+## Annotation은 @로 시작한다.
