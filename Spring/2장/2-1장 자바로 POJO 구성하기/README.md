@@ -1,7 +1,7 @@
-# Spring 5 Recipes 참고
-
-# 2장 스프링코어
 ## 2-1 자바로 POJO 구성하기
+
+### 패키지 com.example.practicespring 에서 테스트
+
 
 ### POJO (Plain Old Java Object)
 ```java
@@ -295,4 +295,25 @@ regex, aspectj는 각각 정규표현식과 AspectJ 포인트컷 표현식으로
             classes = {org.springframework.stereotype.Controller.class})
     }
 )
+```
+
+### IoC 컨테이너에서 POJO 인스턴스/빈 가져오기
+
+```java
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+public class Main {
+    public static void main(String[] args) {
+        ApplicationContext context = new AnnotationConfigApplicationContext("com.example.practicespring");
+        SequenceDao sequenceDao = context.getBean(SequenceDao.class);
+
+        System.out.println(sequenceDao.getNextValue("IT"));
+        System.out.println(sequenceDao.getNextValue("IT"));
+    }
+}
+
+결과
+10000
+10001
 ```
