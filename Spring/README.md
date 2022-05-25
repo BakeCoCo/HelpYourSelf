@@ -2,10 +2,10 @@
 
 
 ### POJO (Plain Old Java Object)
-```
-오래된 방식의 간단한 자바 오브젝트 라는 의미
+```java
+//오래된 방식의 간단한 자바 오브젝트 라는 의미
 
-기본형태 예시)
+//기본형태 예시)
 public class User {
     private String user;
     private String pass;
