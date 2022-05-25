@@ -2,10 +2,10 @@
 
 ## SpringFramework의 기초
 
-1. POJO (Plain Old Java Object)
-2. IoC  (Inversion of Control)
-3. DI   (Dependency Injection)
-4. AOP  (Aspect-Oriented Programming)
+1. POJO (Plain Old Java Object)         오래된 방식의 자바객체
+2. IoC  (Inversion of Control)          제어의 역전
+3. DI   (Dependency Injection)          의존성 주입
+4. AOP  (Aspect-Oriented Programming)   관점 지향 프로그래밍
 
 
 ## POJO (Plain Old Java Object) 오래된 방식의 자바객체
@@ -43,6 +43,11 @@ public class User {
     private String name;
     private String game;
 
+    public User() {
+        this.name = "사용자";
+        this.game = "게임";
+    }
+    
     public String getName() {
         return name;
     }
@@ -82,17 +87,15 @@ public class Main {
     public static void main(String[] args) {
         GameStart st = new GameStart();
         User user = new User();
-        user.setName("LHJ");
-        user.setGame("Spring");
+        user.setName("LHJ");    // 입력을 안하면 사용자
+        user.setGame("Spring"); // 입력을 안하면 게임
         st.print(user);
     }
 }
 ```
 
 ```
-
 결과 : LHJ회원이 Spring을 플레이합니다.
-
 ```
 
 
@@ -132,7 +135,38 @@ public testDI implements DItest{
 }
 ```
 
-## AOP
+## AOP  관점 지향 프로그래밍
+```
+AOP란 흩어진 AspectJ자바 프레임워크를 다른 구현체와 연동하여 사용하는 방법
+흩어진 Aspect를 모듈화 하는 프로그래밍 기법.
+```
+1. Aspect
+```
+흩어진 관심사(Crosscutting Concerns)를 묶어서 모듈화 한 것.
+하나의 모듈. Advice와 Point Cut이 들어간다.
 ```
 
+2. Target
 ```
+Aspect가 가지고 있는 Advice가 적용되는 대상(클래스, 메서드 등등)을 말한다.
+```
+
+3. Advice
+```
+어떤 일을 해야하는지에 대한것.
+해야할 일들에 대한 정보를 가지고 있다.
+```
+
+4. Join Point
+```
+가장 흔한 Join Point는 메서드 실행 시점이다.
+Advice가 적용될 위치, 끼어들 지점, 생성자 호출 직전, 생성자 호출시, 필드에 접근하기전, 필드에 값을 가져갈때 등등
+```
+
+5. Point Cut
+```
+Join Point의 상세한 스펙을 정의한것.
+어디에 적용해야 하는지에 대한 정보를 가지고 있다.
+"A클래스에 B메서드를 적용할 때 호출을 해라." 와 같은 구체적인 정보를 준다.
+```
+
