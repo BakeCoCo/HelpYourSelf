@@ -164,3 +164,147 @@ SequenceGenerator{prefix='30', suffix='A', initial=100000, counter=0}
 SequenceGenerator{prefix='30', suffix='A', initial=100000, counter=0}
 ```
 
+### POJO 클래스에 @Component를 붙여 DAO Bean 생성하기
+```
+POJO는 대부분 DB나 유저 입력을 활용해 인스턴스로 만든다.
+
+이번엔
+1. Domain클래스
+2. DAO(Data Access Object)
+    를 이용해 POJO를 생성한다.
+
+이번에 하는것이 기초역할을 하므로 반드시 이런 구조에 익숙해져야 한다.
+```
+
+```java
+// id, prefix, suffix 3프로퍼티를 지닌 Sequence 도메인 클래스를 생성.
+public class Sequence {
+    private final String id;
+    private final String prefix;
+    private final String suffix;
+
+    public Sequence(String id,String prefix,String suffix) {
+        this.id = id;
+        this.prefix = prefix;
+        this.suffix = suffix;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getPrefix() {
+        return prefix;
+    }
+
+    public String getSuffix() {
+        return suffix;
+    }
+}
+```
+
+
+```java
+// DB 데이터를 엑세스 처리하는 DAO 인터페이스 생성.
+public interface SequenceDao {
+    public Sequence getSequence(String sequenceId);
+    public int getNextValue(String sequenceId);
+}
+```
+
+```java
+// 실제로는 데이터 엑세스 로직을 DAO인터페이스에 구현하겠지만
+// 편의상 하드코딩한다.
+import org.springframework.stereotype.Component;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
+
+// Component에 sequenceDao를 넣으면 스프링은 이 클래스를 이용해 POJO를 생성한다.
+@Component("sequenceDao")
+public class SequenceDaoImpl implements SequenceDao{
+
+    private final Map<String,Sequence> sequenceMap = new HashMap<>();
+    private final Map<String, AtomicInteger> values = new HashMap<>();
+
+    public SequenceDaoImpl() {
+        sequenceMap.put("IT",new Sequence("IT","30","A"));
+        values.put("IT", new AtomicInteger(10000));
+    }
+
+    @Override
+    public Sequence getSequence(String sequenceId) {
+        return sequenceMap.get(sequenceId);
+    }
+
+    @Override
+    public int getNextValue(String sequenceId) {
+        AtomicInteger value = values.get(sequenceId);
+        return value.getAndIncrement();
+    }
+}
+```
+
+### Component
+```
+@Component는 스프링이 발견할 수 있게 POJO에 붙이는 범용 Annotation이다.
+스프링에는 Persistence(영속화), Service, Presentation(표현), 3Layer(계층)이 있는데
+3Layer 에는 @Repository, @Service, @Controller가 각각 3Layer를 가리키는 Annotation이다.
+
+POJO의 쓰임새를 잘 모르면 그냥 @Component를 붙여도 되지만
+특정 용도에 맞는 혜택을 누리려면 구체적으로 명시하는 편이 좋다.
+
+예) @Repository는 발생한 예외를 DataAccessException으로 감싸 던지므로 디비깅 시 유리함.
+```
+
+### Annotation을 스캐닝하는 필터로 IoC컨테이너 초기화 하기.
+```
+기본적으로 스프링은
+@Configuration
+@Bean
+@Component
+@Repository
+@Service
+@Controller
+가 달린 클래스를 모두 감지한다.
+
+이때 하나 이상의 포함/제외 Filter를 적용해서 Scanning 과정을 Customizing할 수 있다.
+
+Filter표현식은 4종류가 있다.
+annotation , assignable은 각각 필터 대상의 Annotation Type및 Class/Interface 를 지정하며
+regex, aspectj는 각각 정규표현식과 AspectJ 포인트컷 표현식으로 Class를 매치하는 용도로 쓰인다.
+```
+
+```java
+@ComponentScan(
+    includeFilters = {
+        @ComponentScan.Filter(
+            // 이름에 Dao나 Service가 포함된 클래스를 Include
+            // Annotation이 달려있지 않은 클래스도 Include한다.
+            type = FilterType.REGEX,
+            pattern = {"com.example.practicespring.*Dao",
+                       "com.example.practicespring.*Service"})
+    },
+    excludeFilters = {
+        @ComponentScan.Filter(
+            // @Controller Annotation은 exclude한다.
+            type = FilterType.ANNOTATION,
+            classes = {org.springframework.stereotype.Controller.class})
+    }
+)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
