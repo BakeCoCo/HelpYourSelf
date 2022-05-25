@@ -29,6 +29,9 @@ public class User {
 
 ```
 
+
+### 자바로 POJO 구성하기
+
 ```java
 // SequenceGenerator
 import java.util.concurrent.atomic.AtomicInteger;
