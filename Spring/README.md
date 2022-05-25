@@ -6,6 +6,7 @@
 2. IoC  (Inversion of Control)          제어의 역전
 3. DI   (Dependency Injection)          의존성 주입
 4. AOP  (Aspect-Oriented Programming)   관점 지향 프로그래밍
+5. CGLIB(Code Generator Library)        코드 생성 라이브러리
 
 ## POJO (Plain Old Java Object) 오래된 방식의 자바객체
 ```java
@@ -169,6 +170,7 @@ Join Point의 상세한 스펙을 정의한것.
 "A클래스에 B메서드를 적용할 때 호출을 해라." 와 같은 구체적인 정보를 준다.
 ```
 
+### CGLIB (Code Generator Library) 코드 생성 라이브러리
 
 
 ## @Configuration
