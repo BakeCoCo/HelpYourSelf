@@ -90,14 +90,41 @@ Configuration 클래스에 선언된 Bean을 BeanFactory 또는 ApplicationConte
 유일한 Bean이름을 getBean() 메서드의 인수로 호출한다.
 getBean() 메서드는 java.lang.Object형으로 반환하므로 Type에 맞게 캐스팅한다.
 
-
 기본 사용 예1)
 가져올 Configuration에 있는 Bean을 가져오는것이니
-Configuration클래스 변수명 = (Configuration클래스명) context.getBean(Bean명);
+Configuration클래스명 변수명 = (Configuration클래스명) context.getBean(Bean클래스명);
+
 SequenceGenerator generator = (SequenceGenerator) context.getBean("sequenceGenerator");
 
 기본 사용 예2)
-Configuration클래스 변수명 = (Configuration클래스명) context.getBean(Bean명,Configuration클래스.class);
+캐스팅을 안 하려면 getBean() 메서드의 두 번째 인수에 Bean클래스명을 지정.
 SequenceGenerator generator = context.getBean("sequenceGenerator",SequenceGenerator.class);
+
+기본 사용 예3)
+Bean이 1개 뿐이라면 이름을 생략할 수 있다.
+SequenceGenerator generator = context.getBean(SequenceGenerator.class);
+
+이런 식으로 POJO 인스턴스/빈을 스프링 외부에서 생성자를 이용해 여느 객체처럼 사용할 수 있다.
+```
+
+```java
+// Main
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+public class Main {
+    public static void main(String[] args) {
+        ApplicationContext context = new AnnotationConfigApplicationContext(SequenceGeneratorConfiguration.class);
+        SequenceGenerator generator = context.getBean(SequenceGenerator.class);
+        System.out.println(generator.toString());
+        System.out.println(generator.toString());
+    }
+}
+```
+
+```
+실행 결과
+SequenceGenerator{prefix='30', suffix='A', initial=100000, counter=0}
+SequenceGenerator{prefix='30', suffix='A', initial=100000, counter=0}
 ```
 
