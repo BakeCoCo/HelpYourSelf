@@ -5,8 +5,8 @@
 1. POJO (Plain Old Java Object)         오래된 방식의 자바객체
 2. IoC  (Inversion of Control)          제어의 역전
 3. DI   (Dependency Injection)          의존성 주입
-4. AOP  (Aspect-Oriented Programming)   관점 지향 프로그래밍
-5. CGLIB(Code Generator Library)        코드 생성 라이브러리
+4. CGLIB(Code Generator Library)        코드 생성 라이브러리
+5. AOP  (Aspect-Oriented Programming)   관점 지향 프로그래밍
 
 ## POJO (Plain Old Java Object) 오래된 방식의 자바객체
 ```java
@@ -135,6 +135,14 @@ public testDI implements DItest{
 }
 ```
 
+### CGLIB (Code Generator Library) 코드 생성 라이브러리
+```
+CGLIB는 코드 생성 라이브러리(Code Generator Library)로 런타임에 동적으로 자바 클래스의 Proxy를 생성해주는 기능을 제공한다.
+CGLIB를 사용하면 매우 쉽게 Proxy객체를 생성할 수 있으며, 성능 또한 우수하다.
+더불어, Interface가 아닌 Class에 대해서 동적 Proxy를 생성할 수 있기 때문에 다양한 프로젝트에서 널리 사용되고 있다.
+예를 들어, Hibernate는 JavaBean 객체에 대한 프록시를 생성할 때 CGLIB를 사용하며, Spring은 Proxy기반의 AOP를 구현할때 CGLIB를 사용하고 있다.
+```
+
 ## AOP  관점 지향 프로그래밍
 ```
 AOP란 흩어진 AspectJ자바 프레임워크를 다른 구현체와 연동하여 사용하는 방법
@@ -169,8 +177,6 @@ Join Point의 상세한 스펙을 정의한것.
 어디에 적용해야 하는지에 대한 정보를 가지고 있다.
 "A클래스에 B메서드를 적용할 때 호출을 해라." 와 같은 구체적인 정보를 준다.
 ```
-
-### CGLIB (Code Generator Library) 코드 생성 라이브러리
 
 
 ## @Configuration
