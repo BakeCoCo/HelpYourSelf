@@ -1,0 +1,32 @@
+/**
+ * 입력한 것의 필터 적용 </br>
+ * 
+ * @function gfn_filter
+ * @param {Grid} 필터링할 그리드
+ * @param {Column} 필터링할 컬럼
+ * @return {String} 입력한 값
+ * @memberOf lib.common
+ */
+this.gfn_filter = function(sGrd,objColumn,v){
+	var fStr = "1==0";
+	var and = " && ";
+	var or = " || ";
+	var objDs = sGrd.getBindDataset();
+	
+	if(v =='' || v== undefined) return objDs.filter('');
+	
+	for(var i=0; i<objColumn.length; i++){
+		if(!this.sfw_isNull(v)) {
+			v = v.toUpperCase();
+			fStr += "||String("+objColumn[i]+").toUpperCase().indexOf('" + v.replace("'","\\'") + "') >= 0";
+		}
+	}
+	objDs.filter(fStr);
+}
+
+
+var sColumn = new Array();
+sColumn.push('COMM_CD');
+sColumn.push('COMM_NM');
+this.gfn_filter(this.grdTA_CODE_M,sColumn,obj.value);
+
