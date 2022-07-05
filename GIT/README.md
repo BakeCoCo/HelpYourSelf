@@ -1,3 +1,12 @@
+
+## Add -> Commit -> Push [커밋]
+
+## Pull[업데이트]
+
+
+
+
+
 # Git Commit Convention
 
 ```
