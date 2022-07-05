@@ -1,7 +1,7 @@
 # Git Commit Convention
 
+```
 # <type>: <subject>
-
 ##### Subject 50 characters ################# -> |
 
 
@@ -36,3 +36,4 @@
 #   Can use multiple lines with "-" for bullet points in body
 #     본문에 목록을 나타낼때는 "-"로 시작한다.
 # ------------------
+```
