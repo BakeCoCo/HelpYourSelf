@@ -48,8 +48,8 @@ wget 으로 다운로드 (Source가 아닌 Binary로 받아야함)
 # 4. Kafka 브로커 실행 옵션 설정
 ```
 vim config/server.properties
-#listeners=PLAINTEXT://:9092 -- #(주석)제거
-#advertised.listeners=PLAINTEXT://your.host.name:9092 -- your.host.name에 ip(localhost or 사용자ip) 로 변경후 #(주석)제거
+#listeners=PLAINTEXT://192.168.0.51:9092 -- 주석제거하고 ip입력
+#advertised.listeners=PLAINTEXT://192.168.0.51:9092 -- 주석제거하고 ip입력
 
 저장
 ```
