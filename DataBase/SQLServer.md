@@ -30,3 +30,18 @@ WHERE TABLE_NAME LIKE '%%'
 ORDER BY A1.TABLE_NAME, A1.column_id
 ;
 ```
+
+```
+DECLARE TEST CURSOR		-- TEST라는 커서를 생성
+	FOR SELECT 1 		-- 1,2,3,4 행 생성
+		UNION ALL
+		SELECT 2
+		UNION ALL
+		SELECT 3
+		UNION ALL
+		SELECT 4
+OPEN TEST				-- 커서를 	OPEN	열기
+FETCH NEXT FROM TEST	-- 다음 커서를 FETCH	가져옴
+CLOSE TEST				-- 커서를 	CLOSE	닫기
+DEALLOCATE TEST			-- 커서 		DEALLOCATE 할당해제
+```
