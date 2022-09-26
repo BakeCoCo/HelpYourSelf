@@ -29,7 +29,6 @@ public class findFile {
 				String str;
 				while((str = br.readLine())!=null) {
 					if(str.indexOf("titletext=")>0) {
-          /* 넥사크로에서 파일명 + titletext 만 뽑아오게 */
 						str = str.substring(str.lastIndexOf("titletext=")+11);
 						str = str.substring(0,str.indexOf("\""));
 						System.out.print(files[k].toString().substring(files[k].toString().lastIndexOf("\\")+1,files[k].toString().indexOf(".xfdl")));
