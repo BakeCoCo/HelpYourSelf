@@ -45,3 +45,7 @@ FETCH NEXT FROM TEST	-- 다음 커서를     FETCH   가져옴
 CLOSE TEST		-- 커서를 		CLOSE	닫기
 DEALLOCATE TEST		-- 커서		 DEALLOCATE 할당해제
 ```
+
+```
+EXEC sp_lock
+```
