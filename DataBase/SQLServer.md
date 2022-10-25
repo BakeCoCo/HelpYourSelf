@@ -64,6 +64,12 @@ SELECT * FROM KSS
 PIVOT (SUM(KSS.BB) FOR KSS.AA IN([S],[D],[Z])) AS PIVOT_RESULT
 ;
 
+RESULT
+---------------------------
+T	S	D	Z
+X	10	20	30
+---------------------------
+
 WITH PIVOT_TABLE AS
 (
  SELECT '1반' AS 반정보, '국어' AS 과목, 90 AS 점수
@@ -78,5 +84,13 @@ WITH PIVOT_TABLE AS
 )
 SELECT * FROM PIVOT_TABLE
 PIVOT (SUM(점수) FOR 과목 IN ([국어], [수학], [영어])) AS PVT
+;
 
+RESULT
+---------------------------
+반정보   국어    수학    영어
+1반	90	80	[NULL]
+2반	70	60	[NULL]
+3반	[NULL]	[NULL]	50
+---------------------------
 ```
