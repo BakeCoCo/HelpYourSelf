@@ -8,6 +8,10 @@ SELECT OBJECT_NAME(object_id) AS PROCEDURE_NAME,
 FROM sys.procedures
 WHERE UPPER(OBJECT_DEFINITION(object_id)) LIKE '%프로시져명%';
 ```
+```
+--락찾기
+EXEC sp_lock
+```
 
 ```
 -- TABLE_NAME, COLUMN_NAME, COLUMN_SEQUENCE, COMMENT
@@ -47,5 +51,32 @@ DEALLOCATE TEST		-- 커서		 DEALLOCATE 할당해제
 ```
 
 ```
-EXEC sp_lock
+--PIVOT + WITH 사용하기
+WITH KSS AS
+(
+	SELECT 'X' AS T, 'S' AS AA, 10 AS BB 
+	UNION ALL
+	SELECT 'X' AS T, 'D' AS AA, 20 AS BB 
+	UNION ALL
+	SELECT 'X' AS T, 'Z' AS AA, 30 AS BB 
+) 
+SELECT * FROM KSS
+PIVOT (SUM(KSS.BB) FOR KSS.AA IN([S],[D],[Z])) AS PIVOT_RESULT
+;
+
+WITH PIVOT_TABLE AS
+(
+ SELECT '1반' AS 반정보, '국어' AS 과목, 90 AS 점수
+ UNION ALL
+ SELECT '1반' AS 반정보, '수학' AS 과목, 80 AS 점수
+ UNION ALL
+ SELECT '2반' AS 반정보, '국어' AS 과목, 70 AS 점수
+ UNION ALL
+ SELECT '2반' AS 반정보, '수학' AS 과목, 60 AS 점수
+ UNION ALL
+ SELECT '3반' AS 반정보, '영어' AS 과목, 50 AS 점수
+)
+SELECT * FROM PIVOT_TABLE
+PIVOT (SUM(점수) FOR 과목 IN ([국어], [수학], [영어])) AS PVT
+
 ```
