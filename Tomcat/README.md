@@ -32,3 +32,16 @@ tomcat-user.xml
   <role rolename="manager-status"/>
   <user username="admin" password="admin" roles="manager-gui,manager-script,manager-jmx,manager-status"/>
 ```
+
+
+환경설정
+
+```
+catalina.bat
+set JAVA_OPTS=%JAVA_OPTS% -Dspring.profiles.active=local
+set JAVA_OPTS=%JAVA_OPTS% -Dspring.profiles.active=dev
+set JAVA_OPTS=%JAVA_OPTS% -Dspring.profiles.active=prod
+
+알아서 필요한것 사용
+```
+
