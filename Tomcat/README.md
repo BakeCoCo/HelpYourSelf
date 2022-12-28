@@ -45,3 +45,10 @@ set JAVA_OPTS=%JAVA_OPTS% -Dspring.profiles.active=prod
 알아서 필요한것 사용
 ```
 
+
+캐시부족
+```
+context.xml
+
+<Resources cachingAllowed="true" cacheMaxSize="100000"/>
+```
