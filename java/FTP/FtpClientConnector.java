@@ -1,5 +1,3 @@
-package com.flexfit.comm.dim.ftp;
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -12,7 +10,6 @@ import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 import com.jcraft.jsch.SftpException;
-import com.safecnc.web.exception.CustomException;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -85,7 +82,7 @@ public class FtpClientConnector {
 				ftpControl.disconnect();
 			}catch (Exception e) {
 				
-				throw new CustomException("3000", str_fileName);
+				throw new Exception("3000", str_fileName);
 			}
 		}
 	}
@@ -130,7 +127,7 @@ public class FtpClientConnector {
 		}
 		catch (SftpException | IOException e) 
 		{
-   			throw new CustomException("3000", null);
+   			throw new Exception("3000", null);
 		}
 		
 		return true;
@@ -204,7 +201,7 @@ public class FtpClientConnector {
 		}
 		catch (SftpException e) 
 		{
-			throw new CustomException("3001", null);
+			throw new Exception("3001", null);
 		}
 		
 		return true;
@@ -238,7 +235,7 @@ public class FtpClientConnector {
 	   		// 세션 연결 실패 시 에러 발생
 	   		if(!session.isConnected()) 
 	   		{
-	   			throw new CustomException("3002", null);
+	   			throw new Exception("3002", null);
 	   		}
 	   		
 	   		// 채널 생성
@@ -253,7 +250,7 @@ public class FtpClientConnector {
 	   			// 세션 접속 종료 후 오류 반환
 	   			session.disconnect();
 	   			
-	   			throw new CustomException("3002", null);
+	   			throw new Exception("3002", null);
 	   		}
 	   		
 	   		// 접속 한 채널 반환
@@ -261,7 +258,7 @@ public class FtpClientConnector {
 	   		
 		} catch (JSchException e) {
 			
-			throw new CustomException("3002", null);
+			throw new Exception("3002", null);
 		}
 	}
 	
