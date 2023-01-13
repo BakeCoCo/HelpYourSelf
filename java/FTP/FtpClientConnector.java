@@ -374,18 +374,18 @@ public class FtpClientConnector {
 	public static void main(String[] args) throws IOException, SftpException, JSchException {
 		FtpClientConnector ftpClientConnector = new FtpClientConnector();
 		
-		ftpClientConnector.setConnType("ftp");
-		ftpClientConnector.setConnMode("pasv");
-		ftpClientConnector.setConnPort(1010);
-		ftpClientConnector.setConnHost("nas.safecnc.co.kr");
-		ftpClientConnector.setConnUsername("leejh");
-		ftpClientConnector.setConnPassword("pig0705");
-		ftpClientConnector.setRootDirectory("00.PRIVATE/임하준/20210331"); // 경로
+		ftpClientConnector.setConnType("");
+		ftpClientConnector.setConnMode("");
+		ftpClientConnector.setConnPort();
+		ftpClientConnector.setConnHost("");
+		ftpClientConnector.setConnUsername("");
+		ftpClientConnector.setConnPassword("");
+		ftpClientConnector.setRootDirectory(""); // 경로
 		
 //		FileInputStream fin = new FileInputStream("AAAA.txt");  //파일업로드
 //		ftpClientConnector.write("CCCC.data", fin);
 		
-		FileOutputStream fout = new FileOutputStream("DK-22-2551(6).pdf");  //파일다운로드
-		ftpClientConnector.read("DK-22-2551(1).pdf", fout);
+		FileOutputStream fout = new FileOutputStream("");  //파일다운로드
+		ftpClientConnector.read("", fout);
 	}
 }
