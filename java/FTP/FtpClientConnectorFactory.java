@@ -1,5 +1,3 @@
-package com.flexfit.comm.dim.ftp;
-
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.annotation.Value;
 
