@@ -1,5 +1,3 @@
-package com.flexfit.comm.dim.ftp;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -7,8 +5,6 @@ import java.io.OutputStream;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
-
-import com.safecnc.web.exception.CustomException;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -32,12 +28,12 @@ public class FTPControl {
 			
 			if(!FTPReply.isPositiveCompletion(reply)) { // 응답이 positive가 아니면 연결 해제
 				ftpClient.disconnect();
-				throw new CustomException("-1", "FTP 연결 실패");
+				throw new Exception("-1", "FTP 연결 실패");
 			}
 			
 			if(!ftpClient.login(id, pw)) { // 로그인 실패하면
 				ftpClient.logout();
-				throw new CustomException("-1", "FTP 로그인 실패");
+				throw new Exception("-1", "FTP 로그인 실패");
 			}
 			
 			ftpClient.setSoTimeout(1000*10);				// TimeOut 설정
@@ -63,7 +59,7 @@ public class FTPControl {
 					}
 					catch (IOException e) 
 					{
-						throw new CustomException("1", e.getMessage());
+						throw new Exception("1", e.getMessage());
 					}
 				}
 			}
@@ -72,7 +68,7 @@ public class FTPControl {
 		catch (Exception e) 
 		{
 			
-			throw new CustomException("-1", e.getMessage());
+			throw new Exception("-1", e.getMessage());
 		}
 	
 	}
@@ -85,18 +81,18 @@ public class FTPControl {
 				ftpClient.disconnect();
 			}
 		} catch (IOException e) {
-			throw new CustomException("-1", e.getMessage());
+			throw new Exception("-1", e.getMessage());
 		}
 	}
 	
 	public void uploadFile(String saveFileNm, InputStream inputStream) throws Exception{
 		try {
 			if(!ftpClient.storeFile(saveFileNm, inputStream)) {
-				throw new CustomException("-1","FTP서버 업로드 실패");
+				throw new Exception("-1","FTP서버 업로드 실패");
 			}
 		} catch (Exception e) {
 			if(e.getMessage().indexOf("not open") > -1) {
-				throw new CustomException("-1", "FTP서버 not open");
+				throw new Exception("-1", "FTP서버 not open");
 			}
 			throw e;
 		}
@@ -105,11 +101,11 @@ public class FTPControl {
 	public void downloadFile(String saveFileNm, OutputStream outputStream) throws Exception{
 		try {
 			if(!ftpClient.retrieveFile(saveFileNm, outputStream)) {
-				throw new CustomException("-1", "FTP서버 다운로드 실패");
+				throw new Exception("-1", "FTP서버 다운로드 실패");
 			}
 		} catch (Exception e) {
 			if(e.getMessage().indexOf("not open") > -1) {
-				throw new CustomException("-1", "FTP서버 not open");
+				throw new Exception("-1", "FTP서버 not open");
 			}
 			throw e;
 		}
