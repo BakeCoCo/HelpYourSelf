@@ -1,20 +1,27 @@
 
 
 
-```
 --프로시져 찾기
+
+```
+
 SELECT OBJECT_NAME(object_id) AS PROCEDURE_NAME,
  OBJECT_DEFINITION(object_id) AS PROCEDURE_DESC
 FROM sys.procedures
 WHERE UPPER(OBJECT_DEFINITION(object_id)) LIKE '%프로시져명%';
 ```
-```
+
 --락찾기
+
+```
 EXEC sp_lock
 ```
 
+
+-- 테이블 찾기 TABLE_NAME, COLUMN_NAME, COLUMN_SEQUENCE, COMMENT
+
 ```
--- TABLE_NAME, COLUMN_NAME, COLUMN_SEQUENCE, COMMENT
+
 SELECT TABLE_NAME, name, column_id, value FROM
 (
 SELECT
@@ -35,6 +42,7 @@ ORDER BY A1.TABLE_NAME, A1.column_id
 ;
 ```
 
+-- 커서 사용하기
 ```
 DECLARE @VALUE01	NVARCHAR(MAX)
 DECLARE @VALUE02	NVARCHAR(MAX)
@@ -60,8 +68,10 @@ CLOSE TEST		-- 커서를 		CLOSE	닫기
 DEALLOCATE TEST		-- 커서		 DEALLOCATE 할당해제
 ```
 
-```
+
 --PIVOT + WITH 사용하기
+
+```
 WITH KSS AS
 (
 	SELECT 'X' AS T, 'S' AS AA, 10 AS BB 
