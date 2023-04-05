@@ -104,3 +104,23 @@ RESULT
 3반	[NULL]	[NULL]	50
 ---------------------------
 ```
+
+
+1부터 Z까지 출력
+
+```
+---------------------------
+WITH ROW_TB AS
+(
+   SELECT 1 AS LV
+   UNION ALL
+   SELECT LV + 1 AS LV
+   FROM ROW_TB
+   WHERE LV + 1 <= 36
+)SELECT
+	(CASE WHEN LV >9 THEN CHAR(LV + 54)
+	 ELSE CAST (LV AS VARCHAR)
+	 END) AS SS
+FROM ROW_TB;
+------------------------
+```
