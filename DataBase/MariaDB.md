@@ -1,6 +1,7 @@
 자꾸 유니코드 에러나서 짜증나죽것다
 
 ALTER DATABASE 데이터베이스명 CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
 ALTER TABLE 테이블명 CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
 SQL Error [1366] [22007]: (conn=10) Incorrect string value: '\xE3\x85\x81' for column ``.``.`iCOMM_CDNM` at row 1
